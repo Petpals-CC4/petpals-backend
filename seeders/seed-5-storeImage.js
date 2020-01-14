@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
 
-    return queryInterface.bulkInsert('services', [
+    return queryInterface.bulkInsert('store_images', [
         {
             store_id: '1',
             image_url: 'https://img.designswan.com/2018/11/JPGroom/2.jpg',
