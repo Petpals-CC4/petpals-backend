@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(255)
     },
     account_number: {
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING(255)
     },
   })
 
