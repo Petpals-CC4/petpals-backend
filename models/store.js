@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     store.hasMany(models.feedback, {foreignKey: 'store_id'})
     store.hasMany(models.order, {foreignKey: 'store_id'})
     store.hasMany(models.store_image, {foreignKey: 'store_id'})
-    store.hasMany(models.holiday, {foreignKey: 'store_id'})
+    store.hasMany(models.bank, {foreignKey: 'store_id'})
     store.hasMany(models.service, {foreignKey: 'store_id'})
   }
   return store

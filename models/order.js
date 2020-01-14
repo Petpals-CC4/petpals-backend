@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     order.belongsTo(models.store, {foreignKey: 'store_id'})
     order.belongsTo(models.order_status, {foreignKey: 'status_id'})
     order.belongsToMany(models.service, {foreignKey: 'service_id', through: 'order_service'})
+    order.belongsTo(models.payment_method, {foreignKey: 'payment_method_id'})
   }
   return order
 }
-
