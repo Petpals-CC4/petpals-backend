@@ -2,7 +2,7 @@
   {
     "development": {
       "username": "root",
-      "password": "root",
+      "password": "{{REPLACE_WITH_YOUR_PASSWORD}}",
       "database": "petpals",
       "host": "127.0.0.1",
       "dialect": "mysql",
