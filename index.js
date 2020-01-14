@@ -21,11 +21,14 @@ app.use(cors())
 
 require('./config/passport')
 
-db.sequelize.sync({ force: false, alter: false }).then(() => {
+db.sequelize.sync({ force: true, alter: false }).then(() => {
 
   // userService(app, db);
   // walletService(app, db)
   // transactionService(app, db)
+  app.get("/", (req, res, next) => {
+    res.stauts(200).json({ message: "ok"})
+  })
 
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)

@@ -66,33 +66,36 @@ Create a config.json `./config/config.json` with this detail, edit your password
   {
     "development": {
       "username": "root",
-      "password": "YOUR_PASSWORD",
-      "database": "YOUR_DATABASE_NAME",
+      "password": "{{REPLACE_YOUR_PASSWORD}}",
+      "database": "petpals",
       "host": "127.0.0.1",
       "dialect": "mysql",
       "operatorsAliases": 0,
       "port": 3306,
-      "app_port": 5000
+      "app_port": 5000,
+      "timezone": "Asia/Bangkok"
     },
     "test": {
       "username": "root",
-      "password": "YOUR_PASSWORD",
-      "database": "YOUR_DATABASE_NAME",
+      "password": null,
+      "database": "database_test",
       "host": "127.0.0.1",
       "dialect": "mysql",
       "operatorsAliases": 0,
       "port": 3306,
-      "app_port": 5000
+      "app_port": 5000,
+      "timezone": "Asia/Bangkok"
     },
     "production": {
       "username": "root",
-      "password": "YOUR_PASSWORD",
-      "database": "YOUR_DATABASE_NAME",
+      "password": null,
+      "database": "database_production",
       "host": "127.0.0.1",
       "dialect": "mysql",
       "operatorsAliases": 0,
       "port": 3306,
-      "app_port": 5000
+      "app_port": 5000,
+      "timezone": "Asia/Bangkok"
     }
   }
 ```
