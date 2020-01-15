@@ -135,6 +135,17 @@ module.exports = {
         role: 'user',
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        password: 'admin',
+        firstname: 'Wat',
+        lastname: 'Size',
+        email: 'admin',
+        phone: '081xxx1981',
+        profile_image_url: 'https://f.ptcdn.info/496/043/000/o8oqydgre871QE9ii7m-o.jpg',
+        role: 'admin',
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ])
   },
