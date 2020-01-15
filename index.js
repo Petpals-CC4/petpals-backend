@@ -22,7 +22,7 @@ app.use(cors())
 
 require('./config/passport')
 
-db.sequelize.sync({ force: true, alter: false }).then(() => {
+db.sequelize.sync({ force: false, alter: false }).then(() => {
 
   // userService(app, db);
   // walletService(app, db)
