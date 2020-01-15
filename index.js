@@ -13,6 +13,8 @@ const app = express();
 // const walletService = require('./services/wallet')
 // const transactionService = require('./services/transaction')
 const storeService = require('./services/store')
+const serviceService = require('./services/service')
+
 
 const db = require('./models');
 
@@ -27,6 +29,7 @@ db.sequelize.sync({ force: false, alter: false }).then(() => {
   // userService(app, db);
   // walletService(app, db)
   // transactionService(app, db)
+  serviceService(app, db)
   storeService(app, db)
   app.get("/", (req, res, next) => {
     res.stauts(200).json({ message: "ok"})
