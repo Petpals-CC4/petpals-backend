@@ -66,7 +66,45 @@ module.exports = (app, db, Op) => {
             res.json(err.message)
         }
 
-       
     })
     
+ 
+    app.put('/shopdetail/:id/verifypayment/:order_id', async (req, res) => {
+
+        try {
+
+            const uploadRequest = {
+                order_id: req.params.order_id,
+                slip_image: req.body.slip_image
+            }
+
+            const successUpload = await db.order.update({
+                slip_image: uploadRequest.slip_image,   
+            },{
+                where: {
+                    id: uploadRequest.order_id
+                }
+            })
+
+            const order = await db.order.findOne({
+                where: {id: uploadRequest.order_id},
+                attributes: ['status_id']
+            })
+            const orderStatusId = order.status_id
+
+            const updateOrderStatus = await db.order_status.update({
+                status_name: 'payment_verify'
+            },{
+                where: {id: orderStatusId}
+            })
+
+
+            res.status(201).json('payment success')
+
+        } catch (err) {
+            res.status(201).json(err.message)
+        }
+    })
+
+
 }
