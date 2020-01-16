@@ -26,14 +26,14 @@ app.use(cors())
 
 require('./config/passport')
 
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync({ force: false, alter: false }).then(() => {
 
 
   serviceService(app, db, Op)
   storeService(app, db)
   orderService(app, db, Op)
 
-  
+
   app.get("/", (req, res, next) => {
     res.stauts(200).json({ message: "ok"})
   })

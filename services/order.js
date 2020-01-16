@@ -42,6 +42,8 @@ module.exports = (app, db, Op) => {
                 total_price: orderRequest.total_price
             })
             const orderId = await createOrder.id
+            console.log(orderId)
+            console.log(orderRequest.service_id)
     
             // 4. find service-price and use orderId to creat orderService 
     
@@ -50,17 +52,18 @@ module.exports = (app, db, Op) => {
                 attributes: ['service_price'],
             })
             const servicePrice = await findServicePrice.service_price
+            console.log(servicePrice)
 
             // !!!bug cant create order service
             const createOrderService = await db.order_service.create({
-                service_price: Number(servicePrice),
-                order_id: Number(orderId),
-                service_id: orderRequest.service_id,
+                service_price: 4000,
+                service_id: `${orderRequest.service_id}`,
+                order_id: `${orderId}`
             })
     
-            res.status(201).json('success')
+            res.json('success')
         } catch (err) {
-            res.status(501).json('fail to order', err.message)
+            res.json(err.message)
         }
 
        
