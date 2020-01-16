@@ -16,6 +16,7 @@ const app = express();
 const storeService = require('./services/store')
 const serviceService = require('./services/service')
 const orderService = require('./services/order')
+const bankService = require('./services/bank')
 
 const db = require('./models');
 const Op = Sequelize.Op
@@ -32,6 +33,7 @@ db.sequelize.sync({ force: false, alter: false }).then(() => {
   serviceService(app, db, Op)
   storeService(app, db)
   orderService(app, db, Op)
+  bankService(app, db)
 
 
   app.get("/", (req, res, next) => {
