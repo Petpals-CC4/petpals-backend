@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
 
   service.associate = (models) => {
     service.belongsTo(models.store, {foreignKey: 'store_id'})
-    service.belongsToMany(models.order, {foreignKey: 'order_id', through: 'order_service'})
+    service.belongsToMany(models.order, {foreignKey: 'service_id', through: 'order_service'})
   }
   return service
 }
