@@ -7,17 +7,42 @@ module.exports = (app, db, Op) => {
             attributes: ['id', 'store_name', 'store_description'],
             include: [
                 {
+                    model: db.user,
+                    attributes: ['profile_image_url']
+                },
+                {
+                    model: db.feedback,
+                    attributes: [ 'rating' ]
+                },
+                {
+                    model: db.address,
+                    attributes: ['id', 'house_no', 'road', 'sub_district', 'district', 'province', 'post_code']
+                },
+                {
                     model: db.store_image,
                     attributes: ['image_url']
                 },
                 {
                     model: db.service,
-                    attributes: ['service_name']
+                    attributes: ['id', 'service_name', 'service_description', 'service_price']
                 }
             ]
         })
+        const newTopListStore = await topListStore.map(list => {
+            // return list
+            let feedbackSummary = list.feedbacks.reduce((sum, curr) => sum += curr.rating, 0)
+            return  {
+                id: list.id,
+                store_name: list.store_name,
+                store_description: list.store_description,
+                store_images: list.store_images.map(item => item.image_url),
+                services: list.services,
+                profile_image_url: list.user.profile_image_url,
+                feedback_score: feedbackSummary / list.feedbacks.length
+            }
+        })
         
-        res.status(201).json(topListStore)
+        res.status(201).json(newTopListStore)
     })
 
 
@@ -34,12 +59,30 @@ module.exports = (app, db, Op) => {
             attributes: ['id', 'store_name', 'store_description'],
             include: [
                 {
+                    model: db.user,
+                    attributes: ['profile_image_url']
+                },
+                {
+                    model: db.feedback,
+                    attributes: [ 'rating', 'comment' ],
+                    include: [
+                        {
+                          model: db.user,
+                          attributes:['firstname','lastname']
+                        }
+                    ]
+                },
+                {
                     model: db.address,
-                    attributes: ['house_no', 'road', 'sub_district', 'district', 'province', 'post_code']
+                    attributes: ['id', 'house_no', 'road', 'sub_district', 'district', 'province', 'post_code']
+                },
+                {
+                    model: db.store_image,
+                    attributes: ['image_url']
                 },
                 {
                     model: db.service,
-                    attributes: ['service_name', 'service_description', 'service_price'],
+                    attributes: ['id', 'service_name', 'service_description', 'service_price'],
                     where: {
                         service_name : {
                             [Op.substring]: searchInputField.key_service
@@ -48,7 +91,26 @@ module.exports = (app, db, Op) => {
                 }
             ]
         })
+        const newStoreList = await storeList.map(list => {
+            // return list
+            let feedbackSummary = list.feedbacks.reduce((sum, curr) => sum += curr.rating, 0)
+            return  {
+                id: list.id,
+                store_name: list.store_name,
+                store_description: list.store_description,
+                store_images: list.store_images.map(item => item.image_url),
+                services: list.services,
+                profile_image_url: list.user.profile_image_url,
+                feedback_score: feedbackSummary / list.feedbacks.length,
+                feedbacks: list.feedbacks.map(feedback => ({
+                    rating: feedback.rating,
+                    comment: feedback.comment,
+                    firstname: feedback.user.firstname,
+                    lastname: feedback.user.lastname,
+                }))
+            }
+        })
 
-        res.status(201).json(storeList)
+        res.status(201).json(newStoreList)
     })
 }
