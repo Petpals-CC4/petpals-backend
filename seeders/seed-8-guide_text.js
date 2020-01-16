@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     
-    return queryInterface.bulkInsert('guide_text', [
+    return queryInterface.bulkInsert('guide_texts', [
       {
         name: 'อาบน้ำ',
         createdAt: new Date(),

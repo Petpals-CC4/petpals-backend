@@ -15,6 +15,7 @@ const app = express();
 // const transactionService = require('./services/transaction')
 
 const storeService = require('./services/service')
+const orderService = require('./services/order')
 
 const db = require('./models');
 const Op = Sequelize.Op
@@ -25,13 +26,14 @@ app.use(cors())
 
 require('./config/passport')
 
-db.sequelize.sync({ force: false, alter: false }).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
 
   // userService(app, db);
   // walletService(app, db)
   // transactionService(app, db)
 
   storeService(app, db, Op)
+  orderService(app, db, Op)
   
   app.get("/", (req, res, next) => {
     res.stauts(200).json({ message: "ok"})
