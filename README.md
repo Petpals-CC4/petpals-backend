@@ -1,4 +1,4 @@
-# Petpals-backend
+# PetPals-backend
 
 ## 📘 Description
 
@@ -15,12 +15,12 @@ A Group Final-Project in CodeCamp 2019.
 
 ```mermaid
 graph LR;
-  Petpals --> Petpals-backend;
-  Petpals-backend --> Petpals;
-  Petpals-backend -->|JWT| PassportJS;
-  PassportJS -->|Authentication| Petpals-backend;
-  Petpals-backend --> Sequelize;
-  Sequelize --> Petpals-backend;
+  PetPals --> PetPals-backend;
+  PetPals-backend --> PetPals;
+  PetPals-backend -->|JWT| PassportJS;
+  PassportJS -->|Authentication| PetPals-backend;
+  PetPals-backend --> Sequelize;
+  Sequelize --> PetPals-backend;
   Sequelize --> MySQL;
   MySQL --> Sequelize;
 ```
@@ -34,14 +34,14 @@ graph LR;
 ## 🏷 Versioning
 
 - Current Version: 0.1.1
-- For the versions available, see the [tags on this repository.](https://github.com/Petpals-CC4/petpals-backend/tags)
+- For the versions available, see the [tags on this repository.](https://github.com/PetPals-CC4/petpals-backend/tags)
 
 ## 💡 Getting Started
 
 1️⃣ Clone this project by
 
   ```bash
-    git clone https://github.com/Petpals-CC4/petpals-backend.git
+    git clone https://github.com/PetPals-CC4/petpals-backend.git
   ```
 
 2️⃣ Run Commands
@@ -102,11 +102,11 @@ Create a config.json `./config/config.json` with this detail, edit your password
 
 ## Example APIs
 
-Please go to Postman Collection [Petpals-backend.postman_collection.json](Petpals-backend.postman_collection.json)
+Please go to Postman Collection [PetPals-backend.postman_collection.json](PetPals-backend.postman_collection.json)
 
 ## 😎 Author
 
-Petpals Team - Codecamp 4 (2019)
+PetPals Team - Codecamp 4 (2019)
 
 ## 🚩 Created at
 
