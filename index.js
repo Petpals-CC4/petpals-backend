@@ -15,6 +15,7 @@ const serviceService = require('./services/service')
 const orderService = require('./services/order')
 const bankService = require('./services/bank')
 const userService = require('./services/user')
+const guide_text = require('./services/guide_text')
 
 const db = require('./models');
 const Op = Sequelize.Op
@@ -32,6 +33,7 @@ db.sequelize.sync({ force: true, alter: false }).then(() => {
   orderService(app, db, Op)
   bankService(app, db)
   userService(app, db)
+  guide_text(app, db)
 
   app.use("/healthCheck", (req, res, next) => {
     res.status(200).json({ message: "ok"})
