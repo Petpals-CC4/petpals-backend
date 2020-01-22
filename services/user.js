@@ -57,7 +57,7 @@ module.exports = (app, db) => {
             role: "store"
           })
           if (result.message !== 'user created') {
-            res.status(500).send({ message: "Error: Cannot Set Role User" })
+            res.status(500).send({ message: "Error: Cannot Set Role User", ...result })
           } else {
             res.status(200).send(result);
           }

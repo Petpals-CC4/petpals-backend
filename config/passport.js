@@ -25,7 +25,7 @@ passport.use(
       if (!userFound) {
         let salt = bcrypt.genSaltSync(BCRYPT_SALT_ROUNDS);
         let hashedPassword = bcrypt.hashSync(password, salt);
-        let createdUser = await db.user.create({ email: username, password: hashedPassword, role: "guest" })
+        let createdUser = await db.user.create({ email: username, password: hashedPassword, role: "user" })
         if (createdUser) {
           console.log("user created");
           return done(null, createdUser);
