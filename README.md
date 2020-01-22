@@ -56,7 +56,16 @@ graph LR;
 
 3️⃣ Add `config.json` in `./config/config.json` for more detail, next topic.
 
-4️⃣ Enjoy with :D
+4️⃣ Run Commands
+
+  ```bash
+    npx sequelize db:create
+    npm start
+
+    # If you want some mock data please run `npm seed` after run `npm start`
+  ```
+
+5️⃣ Enjoy with :D
 
 ## ⚙️ Configurations
 

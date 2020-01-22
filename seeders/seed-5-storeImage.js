@@ -6,25 +6,25 @@ module.exports = {
     return queryInterface.bulkInsert('store_images', [
         {
             store_id: '1',
-            image_url: 'https://img.designswan.com/2018/11/JPGroom/2.jpg',
+            image_url: 'https://uppicimg.com/file/cOfyZoAH.jpg',
             createdAt: new Date(),
             updatedAt: new Date()
         },
         {
             store_id: '1',
-            image_url: 'https://img.designswan.com/2018/11/JPGroom/4.jpg',
+            image_url: 'https://uppicimg.com/file/Mgm1pv3H.jpg',
             createdAt: new Date(),
             updatedAt: new Date()
         },
         {
             store_id: '1',
-            image_url: 'https://img.designswan.com/2018/11/JPGroom/8.jpg',
+            image_url: 'https://uppicimg.com/file/1knyTZUD.jpg',
             createdAt: new Date(),
             updatedAt: new Date()
         },
         {
             store_id: '2',
-            image_url: 'https://img.https://images.unsplash.com/photo-1565726166189-e9814a05ffde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80.com/2018/11/JPGroom/2.jpg',
+            image_url: 'https://images.unsplash.com/photo-1565726166189-e9814a05ffde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80.com/2018/11/JPGroom/2.jpg',
             createdAt: new Date(),
             updatedAt: new Date()
         },
