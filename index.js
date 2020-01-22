@@ -10,12 +10,13 @@ const PORT = config.app_port
 
 const app = express();
 
-const storeService = require('./services/store')
-const serviceService = require('./services/service')
-const orderService = require('./services/order')
 const bankService = require('./services/bank')
+const feedbackService = require('./services/feedback')
+const guideTextService = require('./services/guide_text')
+const orderService = require('./services/order')
+const serviceService = require('./services/service')
+const storeService = require('./services/store')
 const userService = require('./services/user')
-const guide_text = require('./services/guide_text')
 
 const db = require('./models');
 const Op = Sequelize.Op
@@ -28,12 +29,13 @@ require('./config/passport')
 
 db.sequelize.sync({ force: true, alter: false }).then(() => {
 
+  bankService(app, db)
+  feedbackService(app, db)
+  guideTextService(app, db)
+  orderService(app, db, Op)
   serviceService(app, db, Op)
   storeService(app, db)
-  orderService(app, db, Op)
-  bankService(app, db)
   userService(app, db)
-  guide_text(app, db)
 
   app.use("/healthCheck", (req, res, next) => {
     res.status(200).json({ message: "ok"})
