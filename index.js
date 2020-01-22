@@ -26,7 +26,7 @@ app.use(cors())
 
 require('./config/passport')
 
-db.sequelize.sync({ force: true, alter: false }).then(() => {
+db.sequelize.sync({ force: false, alter: false }).then(() => {
 
   serviceService(app, db, Op)
   storeService(app, db)
