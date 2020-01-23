@@ -1,0 +1,239 @@
+{
+	"info": {
+		"_postman_id": "0d3fc71a-3d66-4203-bc2b-f76ac4293513",
+		"name": "Petpals",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Store Detail",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/shopdetail/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"shopdetail",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"wat\",\n\t\"password\": \"wat\",\n\t\"firstname\": \"wat\",\n\t\"lastname\": \"wat\",\n\t\"phone\": \"0987654321\",\n\t\"profile_image_url\": \"https://img.icons8.com/plasticine/2x/user.png\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/signup",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup User Store",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"wat\",\n\t\"password\": \"wat\",\n\t\"firstname\": \"wat\",\n\t\"lastname\": \"wat\",\n\t\"phone\": \"0987654321\",\n\t\"profile_image_url\": \"https://img.icons8.com/plasticine/2x/user.png\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/signup_store",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"signup_store"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"wat\",\n\t\"password\": \"wat\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/signin",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Feedback Store",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInJvbGUiOiJ1c2VyIiwidXNlcm5hbWUiOiJ3YXQiLCJpYXQiOjE1Nzk3MDA1OTIsImV4cCI6MTU3OTcwNDE5Mn0.HenTWBLeZmWP_Z-47XEwK0-3RcBkXWpv-A5lCGk7XcM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/feedback_store/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"feedback_store",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Feedback",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InVzZXIiLCJ1c2VybmFtZSI6IndhdCIsImlhdCI6MTU3OTc1MzUyMywiZXhwIjoxNTc5NzU3MTIzfQ.LVwFRQlYErca8hqWj8LWQmg1WqoHySf3Qt8kW0EGGCE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/feedback",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"feedback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Feedback Random",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInJvbGUiOiJ1c2VyIiwidXNlcm5hbWUiOiJ3YXQiLCJpYXQiOjE1Nzk3MDA1OTIsImV4cCI6MTU3OTcwNDE5Mn0.HenTWBLeZmWP_Z-47XEwK0-3RcBkXWpv-A5lCGk7XcM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/feedback_random",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"feedback_random"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c567ff7f-e507-49dd-978e-c01e5b1c30ea",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "afdbe26e-c4f0-4b20-bf42-b08f17720e7c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "f02e13c0-a86d-4114-9555-f0f1a79acf69",
+			"key": "baseUrl",
+			"value": "http://localhost:5000",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
