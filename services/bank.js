@@ -52,10 +52,6 @@ module.exports = (app, db) => {
   app.put("/bank/:id", async (req, res) => {
     const id = req.params.id;
     const store_id = req.body.store_id;
-    console.log(
-      "store_idstore_idstore_idstore_idstore_idstore_idstore_idstore_id",
-      store_id
-    );
     const bankFound = await db.bank.findOne({
       where: { store_id, id }
     });
@@ -88,8 +84,8 @@ module.exports = (app, db) => {
     if (!bankFound) {
       res.status(404).send({ message: "Error: Not Found" });
     } else {
-      const wallet = await bankFound.destroy();
-      console.log(wallet);
+      const bank = await bankFound.destroy();
+      console.log(bank);
       res.status(200).send({ message: "Delete Success" });
     }
   });

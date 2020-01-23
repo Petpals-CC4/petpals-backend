@@ -247,6 +247,165 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get Store_image",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoic2FhZEBnbWFpbC5jb20iLCJpYXQiOjE1Nzk3NzExOTYsImV4cCI6MTU3OTc3NDc5Nn0.kgxL8YqyPVM7HZP-JoGC6Uqeofqg6E6nKmRiNvN7Gkk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/store_image/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"store_image",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Store_image",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoic2FhZEBnbWFpbC5jb20iLCJpYXQiOjE1Nzk3NzExOTYsImV4cCI6MTU3OTc3NDc5Nn0.kgxL8YqyPVM7HZP-JoGC6Uqeofqg6E6nKmRiNvN7Gkk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"image_url\": \"https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/store_image/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"store_image",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Store_image",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoic2FhZEBnbWFpbC5jb20iLCJpYXQiOjE1Nzk3ODA0ODEsImV4cCI6MTU3OTc4NDA4MX0.z01u1AqMgYCkpKHQhHEz0vVV3hBEFlfPrhwO1UegyuA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"image_url\": \"https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg\",\n\t\"store_id\": \"1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/store_image",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"store_image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Store_image",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoic2FhZEBnbWFpbC5jb20iLCJpYXQiOjE1Nzk4MDM1OTMsImV4cCI6MTU3OTgwNzE5M30.ryNKOPTctI_weWhPn0JraoAvqU83X9N7QTj7kps1P5E",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"store_id\": \"1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/store_image/20",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"store_image",
+						"20"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
