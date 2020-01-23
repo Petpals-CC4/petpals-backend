@@ -8,7 +8,7 @@ module.exports = (app, db) => {
         include: [
           {
             model: db.store,
-            attributes: ['store_name']
+            attributes: ['id', 'store_name']
           },
           {
             model: db.user,
@@ -19,12 +19,18 @@ module.exports = (app, db) => {
       if (!feedbacks) {
         res.status(404).send({ message: "Not found Feedback" });
       } else {
-        let feedbacksLean = await feedbacks.map((feedback) => {
+        let uniqID = {}
+        let feedbacksLean = await feedbacks.filter((feedback) => {
+          if (uniqID[feedback.store.dataValues.id]) return false
+          uniqID[feedback.store.dataValues.id] = true
+          return true
+        }).map((feedback) => {
           return {
             id: feedback.id,
+            rating: feedback.rating,
             comment: feedback.comment,
-            storename: feedback.store.dataValues.store_name,
-            fullname: feedback.user.dataValues.firstname + " " + feedback.user.dataValues.lastname
+            storeName: feedback.store.dataValues.store_name,
+            customerName: feedback.user.dataValues.firstname + " " + feedback.user.dataValues.lastname
           }
         })
         let maxLen = feedbacksLean.length
@@ -95,7 +101,7 @@ module.exports = (app, db) => {
             rating: feedback.rating,
             comment: feedback.comment,
             updatedAt: feedback.updatedAt,
-            fullname: feedback.user.dataValues.firstname + " " + feedback.user.dataValues.lastname
+            customerName: feedback.user.dataValues.firstname + " " + feedback.user.dataValues.lastname
           }
         })
         res.status(200).send(feedbacksLean);
