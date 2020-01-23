@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0d3fc71a-3d66-4203-bc2b-f76ac4293513",
+		"_postman_id": "3db1bdc0-772e-4cbb-aae8-10d5f49ae53b",
 		"name": "Petpals",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -199,6 +199,50 @@
 					],
 					"path": [
 						"feedback_random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Store",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InN0b3JlIiwidXNlcm5hbWUiOiJtaWxsQG1haWwuY29tIiwiaWF0IjoxNTc5NzYxOTAzLCJleHAiOjE1Nzk3NjU1MDN9.MEn4cHPnD6Tqdyhc3Sf9RdgHs59A9socGJ4z82M-xmY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"store_name\": \"wat\",\n\t\"store_description\": \"wat\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/store/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"store",
+						"1"
 					]
 				}
 			},
