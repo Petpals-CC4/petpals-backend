@@ -21,7 +21,7 @@ module.exports = (app, db, Op) => {
         },
         {
           model: db.service,
-          attributes: ['id', 'service_name', 'service_description', 'service_price']
+          attributes: ['id', 'service_name', 'service_description']
         }
       ]
     })
@@ -44,12 +44,9 @@ module.exports = (app, db, Op) => {
     }
   })
 
-  app.post('/landingpage/search', async (req, res) => {
+  app.post('/service/search', async (req, res) => {
     const searchInputField = {
-      start_date: req.body.start_date,
-      end_date: req.body.end_date,
-      key_service: req.body.key_service,
-      location: req.body.location
+      searchText: req.body.searchText,
     }
     const storeList = await db.store.findAll({
       attributes: ['id', 'store_name', 'store_description'],
@@ -60,28 +57,22 @@ module.exports = (app, db, Op) => {
         },
         {
           model: db.feedback,
-          attributes: ['rating', 'comment'],
-          include: [
-            {
-              model: db.user,
-              attributes: ['firstname', 'lastname']
-            }
-          ]
+          attributes: ['rating']
         },
-        {
-          model: db.address,
-          attributes: ['id', 'house_no', 'road', 'sub_district', 'district', 'province', 'post_code']
-        },
-        {
-          model: db.store_image,
-          attributes: ['image_url']
-        },
+        // {
+        //   model: db.address,
+        //   attributes: ['id', 'house_no', 'road', 'sub_district', 'district', 'province', 'post_code']
+        // },
+        // {
+        //   model: db.store_image,
+        //   attributes: ['image_url']
+        // },
         {
           model: db.service,
           attributes: ['id', 'service_name', 'service_description', 'service_price'],
           where: {
             service_name: {
-              [Op.substring]: searchInputField.key_service
+              [Op.substring]: searchInputField.searchText
             }
           }
         }
@@ -94,16 +85,9 @@ module.exports = (app, db, Op) => {
         id: list.id,
         store_name: list.store_name,
         store_description: list.store_description,
-        store_images: list.store_images.map(item => item.image_url),
         services: list.services,
         profile_image_url: list.user.profile_image_url,
-        feedback_score: feedbackSummary / list.feedbacks.length,
-        feedbacks: list.feedbacks.map(feedback => ({
-          rating: feedback.rating,
-          comment: feedback.comment,
-          firstname: feedback.user.firstname,
-          lastname: feedback.user.lastname,
-        }))
+        feedback_score: list.feedbacks.length > 0 ? (feedbackSummary / list.feedbacks.length).toFixed(2) : 0,
       }
     })
 
