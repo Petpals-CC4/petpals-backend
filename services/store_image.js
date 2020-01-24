@@ -1,10 +1,13 @@
 const passport = require("passport");
+const {findStoreIDbyUserID} = require("../utils");
+
 module.exports = (app, db) => {
   app.get(
-    "/store_image/:store_id",
+    "/store_image",
     passport.authenticate("jwt", { session: false }),
-    async (req, res, next) => {
-      const store_id = req.params.store_id;
+    async (req, res) => {
+      const store_id = await findStoreIDbyUserID(db, req.user.id);
+      console.log(store_id);
       const store_image = await db.store_image.findAll({
         where: { store_id },
         attributes: ["id", "image_url"]
@@ -26,10 +29,11 @@ module.exports = (app, db) => {
       session: false
     }),
     async (req, res) => {
+      const store_id = await findStoreIDbyUserID(db, req.user.id);
       await db.store_image
         .create({
           image_url: req.body.image_url,
-          store_id: req.body.store_id
+          store_id
         })
         .then(result => {
           res.status(201).json(result);
@@ -50,7 +54,7 @@ module.exports = (app, db) => {
     }),
     async (req, res) => {
       const id = req.params.id;
-      const store_id = req.body.store_id;
+      const store_id = await findStoreIDbyUserID(db, req.user.id);
       const storeImageFound = await db.store_image.findOne({
         where: { store_id, id }
       });
@@ -59,8 +63,7 @@ module.exports = (app, db) => {
       } else {
         try {
           const store_image = await storeImageFound.update({
-            image_url: req.body.image_url,
-            store_id: req.body.store_id
+            image_url: req.body.image_url
           });
           console.log(store_image);
           res
@@ -81,7 +84,7 @@ module.exports = (app, db) => {
     }),
     async (req, res) => {
       const id = req.params.id;
-      const store_id = req.body.store_id;
+      const store_id = await findStoreIDbyUserID(db, req.user.id);
       const storeImageFound = await db.store_image.findOne({
         where: { store_id, id }
       });
