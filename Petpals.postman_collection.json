@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0d3fc71a-3d66-4203-bc2b-f76ac4293513",
+		"_postman_id": "3db1bdc0-772e-4cbb-aae8-10d5f49ae53b",
 		"name": "Petpals",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -199,6 +199,351 @@
 					],
 					"path": [
 						"feedback_random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Store",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InN0b3JlIiwidXNlcm5hbWUiOiJtaWxsQG1haWwuY29tIiwiaWF0IjoxNTc5NzYxOTAzLCJleHAiOjE1Nzk3NjU1MDN9.MEn4cHPnD6Tqdyhc3Sf9RdgHs59A9socGJ4z82M-xmY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"store_name\": \"wat\",\n\t\"store_description\": \"wat\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/store/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"store",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Store_image",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoic2FhZEBnbWFpbC5jb20iLCJpYXQiOjE1Nzk3NzExOTYsImV4cCI6MTU3OTc3NDc5Nn0.kgxL8YqyPVM7HZP-JoGC6Uqeofqg6E6nKmRiNvN7Gkk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/store_image/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"store_image",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Store_image",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoic2FhZEBnbWFpbC5jb20iLCJpYXQiOjE1Nzk3NzgxNDUsImV4cCI6MTU3OTc4MTc0NX0.bnB1D8Ns8Ue6gaMabsvZiaYR4yNfZBwiZ_GF2OPF-_Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"image_url\": \"https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/store_image/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"store_image",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Store_image",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoic2FhZEBnbWFpbC5jb20iLCJpYXQiOjE1Nzk3ODA0ODEsImV4cCI6MTU3OTc4NDA4MX0.z01u1AqMgYCkpKHQhHEz0vVV3hBEFlfPrhwO1UegyuA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"image_url\": \"https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg\",\n\t\"store_id\": \"1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/store_image",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"store_image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Store_image",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoic2FhZEBnbWFpbC5jb20iLCJpYXQiOjE1Nzk4MDM1OTMsImV4cCI6MTU3OTgwNzE5M30.ryNKOPTctI_weWhPn0JraoAvqU83X9N7QTj7kps1P5E",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"store_id\": \"1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/store_image/20",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"store_image",
+						"20"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Service (All)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoic2FhZEBnbWFpbC5jb20iLCJpYXQiOjE1Nzk4NjM2ODgsImV4cCI6MTU3OTg2NzI4OH0.JQZ34XrjXvfOvG64CAHceEwCc62B0Qr442L0J4exN3c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/service",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"service"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Service",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoic2FhZEBnbWFpbC5jb20iLCJpYXQiOjE1Nzk4NjM2ODgsImV4cCI6MTU3OTg2NzI4OH0.JQZ34XrjXvfOvG64CAHceEwCc62B0Qr442L0J4exN3c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"service_name\":\"testservice\",\n\"service_description\":\"testservicetestservicetestservice\",\n\"service_price\":\"500\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/service",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"service"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Service",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoic2FhZEBnbWFpbC5jb20iLCJpYXQiOjE1Nzk4NjM2ODgsImV4cCI6MTU3OTg2NzI4OH0.JQZ34XrjXvfOvG64CAHceEwCc62B0Qr442L0J4exN3c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"service_name\":\"edittestservice\",\n\"service_description\":\"edittestservicetestservicetestservice\",\n\"service_price\":\"200\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/service/11",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"service",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Service",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoic2FhZEBnbWFpbC5jb20iLCJpYXQiOjE1Nzk4Njk5OTIsImV4cCI6MTU3OTg3MzU5Mn0.xp_b2YaZoi_gJDZVQypkVmoatdkANV02DECe4gZsJIg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/service/11",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"service",
+						"11"
 					]
 				}
 			},
