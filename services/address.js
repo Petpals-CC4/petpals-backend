@@ -2,32 +2,19 @@ const passport = require("passport");
 const { findStoreIDbyUserID } = require("../utils");
 
 module.exports = (app, db) => {
-  app.get("/bank/:store_id", async (req, res) => {
-    let result = await db.bank.findAll({
-      where: {
-        store_id: req.params.store_id
-      }
-    });
-    if (!result) {
-      res.status(404).send({ message: "Not found Bank by store id" });
-    } else {
-      res.status(200).send(result);
-    }
-  });
-
   app.get(
-    "/bank",
+    "/address",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
       const store_id = await findStoreIDbyUserID(db, req.user.id);
       if (store_id !== null) {
-        let result = await db.bank.findAll({
+        let result = await db.address.findAll({
           where: {
             store_id
           }
         });
         if (!result) {
-          res.status(404).send({ message: "Not found bank by store id" });
+          res.status(404).send({ message: "Not found address by store id" });
         } else {
           res.status(200).send(result);
         }
@@ -38,53 +25,63 @@ module.exports = (app, db) => {
   );
 
   app.post(
-    "/bank",
+    "/address",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
       const store_id = await findStoreIDbyUserID(db, req.user.id);
-      db.bank
-        .create({
-          bank_name: req.body.bank_name,
-          account_name: req.body.account_name,
-          account_number: req.body.account_number,
+      if (store_id !== null) {
+        let result = await db.address.create({
+          house_no: req.body.house_no,
+          village_no: req.body.village_no,
+          road: req.body.road,
+          sub_district: req.body.sub_district,
+          district: req.body.district,
+          province: req.body.province,
+          post_code: req.body.post_code,
           store_id
-        })
-        .then(result => {
-          res.status(201).json(result);
-        })
-        .catch(err => {
-          res.status(400).json({
-            message: err.message
-          });
         });
+        if (!result) {
+          res.status(400).json({
+            message: "Cannot Create Address, please check your body request"
+          });
+        } else {
+          res.status(201).json(result);
+        }
+      } else {
+        res.status(401).send({ message: "Unauthorized" });
+      }
     }
   );
 
   app.put(
-    "/bank/:id",
+    "/address/:id",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
       const id = req.params.id;
       const store_id = await findStoreIDbyUserID(db, req.user.id);
       if (store_id !== null) {
-        const bankFound = await db.bank.findOne({
+        const addressFound = await db.address.findOne({
           where: { store_id, id }
         });
-        if (!bankFound) {
+        if (!addressFound) {
           res.status(404).send({ message: "Error: Not Found" });
         } else {
           try {
-            const bank = await bankFound.update({
-              bank_name: req.body.bank_name,
-              account_name: req.body.account_name,
-              account_number: req.body.account_number
+            const address = await addressFound.update({
+              house_no: req.body.house_no,
+              village_no: req.body.village_no,
+              road: req.body.road,
+              sub_district: req.body.sub_district,
+              district: req.body.district,
+              province: req.body.province,
+              post_code: req.body.post_code
             });
-            // console.log(bank);
+            // console.log(address);
             res
               .status(200)
-              .send({ message: "Update Success", ...bank.dataValues });
+              .send({ message: "Update Success", ...address.dataValues });
           } catch (error) {
-            // res.status(400).send({ message: "bank name cannot be empty." })
+            // res.status(400).send({ message: "address name cannot be empty." })
             res.status(400).send({ message: error.errors[0].message });
           }
         }
@@ -95,20 +92,20 @@ module.exports = (app, db) => {
   );
 
   app.delete(
-    "/bank/:id",
+    "/address/:id",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
       const id = req.params.id;
       const store_id = await findStoreIDbyUserID(db, req.user.id);
       if (store_id !== null) {
-        const bankFound = await db.bank.findOne({
+        const addressFound = await db.address.findOne({
           where: { store_id, id }
         });
-        if (!bankFound) {
+        if (!addressFound) {
           res.status(404).send({ message: "Error: Not Found" });
         } else {
-          await bankFound.destroy();
-          // console.log(bank);
+          await addressFound.destroy();
+          // console.log(address);
           res.status(200).send({ message: "Delete Success" });
         }
       } else {
