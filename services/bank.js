@@ -1,5 +1,9 @@
+const passport = require("passport");
+const {findStoreIDbyUserID} = require("../utils");
+
 module.exports = (app, db) => {
-  app.get("/bank/:store_id", async (req, res) => {
+  app.get("/bank/:store_id", 
+  async (req, res) => {
     let result = await db.bank.findAll({
       where: {
         store_id: req.params.store_id
@@ -10,34 +14,19 @@ module.exports = (app, db) => {
     } else {
       res.status(200).send(result);
     }
-
-    // db.store
-    //   .findOne({
-    //     where: {
-    //       id: req.params.store_id
-    //     },
-    //     attributes: [],
-    //     include: [
-    //         {
-    //         model: db.bank,
-    //         attributes:['id', 'bank_name', 'account_name','account_number']
-    //         }
-    //       ]
-    //     })
-    //     .then(result => {
-    //     res.send(result);
-    //   });
   });
 
-  app.post("/bank", (req, res) => {
-    let reqBody = {
-      bank_name: req.body.bank_name,
-      account_name: req.body.account_name,
-      account_number: req.body.account_number,
-      store_id: req.body.store_id
-    };
+  app.post("/bank",   
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const store_id = await findStoreIDbyUserID(db, req.user.id);
     db.bank
-      .create(reqBody)
+      .create({
+        bank_name: req.body.bank_name,
+        account_name: req.body.account_name,
+        account_number: req.body.account_number,
+        store_id
+      })
       .then(result => {
         res.status(201).json(result);
       })
@@ -49,9 +38,11 @@ module.exports = (app, db) => {
       });
   });
 
-  app.put("/bank/:id", async (req, res) => {
+  app.put("/bank/:id",
+  passport.authenticate("jwt", { session: false }),
+   async (req, res) => {
     const id = req.params.id;
-    const store_id = req.body.store_id;
+    const store_id = await findStoreIDbyUserID(db, req.user.id);
     const bankFound = await db.bank.findOne({
       where: { store_id, id }
     });
@@ -63,7 +54,6 @@ module.exports = (app, db) => {
           bank_name: req.body.bank_name,
           account_name: req.body.account_name,
           account_number: req.body.account_number,
-          store_id: req.body.store_id
         });
         console.log(bank);
         res.status(200).send({ message: "Update Success", ...bank.dataValues });
@@ -74,10 +64,11 @@ module.exports = (app, db) => {
     }
   });
 
-  app.delete("/bank/:id", async (req, res) => {
+  app.delete("/bank/:id",
+  passport.authenticate("jwt", { session: false }),
+   async (req, res) => {
     const id = req.params.id;
-    const store_id = req.body.store_id;
-
+    const store_id = await findStoreIDbyUserID(db, req.user.id);
     const bankFound = await db.bank.findOne({
       where: { store_id, id }
     });

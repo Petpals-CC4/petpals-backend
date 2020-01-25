@@ -18,6 +18,7 @@ const serviceService = require('./services/service')
 const storeService = require('./services/store')
 const userService = require('./services/user')
 const storeImageService = require('./services/store_image')
+const addressService = require('./services/address')
 
 const db = require('./models');
 const Op = Sequelize.Op
@@ -38,6 +39,7 @@ db.sequelize.sync({ force: true, alter: false }).then(() => {
   storeService(app, db)
   userService(app, db)
   storeImageService(app, db)
+  addressService(app, db)
 
   app.use("/healthCheck", (req, res, next) => {
     res.status(200).json({ message: "ok"})
