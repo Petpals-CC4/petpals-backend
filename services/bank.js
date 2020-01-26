@@ -42,21 +42,23 @@ module.exports = (app, db) => {
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
       const store_id = await findStoreIDbyUserID(db, req.user.id);
-      db.bank
-        .create({
+      if (store_id !== null) {
+        let result = await db.bank.create({
           bank_name: req.body.bank_name,
           account_name: req.body.account_name,
           account_number: req.body.account_number,
           store_id
-        })
-        .then(result => {
-          res.status(201).json(result);
-        })
-        .catch(err => {
-          res.status(400).json({
-            message: err.message
-          });
         });
+        if (!result) {
+          res.status(400).json({
+            message: "Cannot Bank, please check your body request"
+          });
+        } else {
+          res.status(201).json(result);
+        }
+      } else {
+        res.status(401).send({ message: "Unauthorized" });
+      }
     }
   );
 

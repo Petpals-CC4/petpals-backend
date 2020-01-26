@@ -548,6 +548,585 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "GET Address",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/address",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"address"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Address",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"house_no\": \"123\",\r\n    \"village_no\": \"5\",\r\n    \"road\": \"testroad\",\r\n    \"sub_district\": \"testsub_district\",\r\n    \"district\": \"tes_districtt\",\r\n    \"province\": \"test_province\",\r\n    \"post_code\": 123456\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/address",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"address"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Address",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"house_no\": \"testput\",\r\n    \"village_no\": \"5\",\r\n    \"road\": \"testput\",\r\n    \"sub_district\": \"testput\",\r\n    \"district\": \"testput\",\r\n    \"province\": \"testput\",\r\n    \"post_code\": 123456\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/address/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"address",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Address",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoic2FhZEBnbWFpbC5jb20iLCJpYXQiOjE1Nzk5MjQ4MzEsImV4cCI6MTU3OTkyODQzMX0.EowwzBw_NFMwADHlpUvjQylri8bCq0eu5b66LVqRnY4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/address/4",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"address",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Payment_method user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/payment_method/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"payment_method",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Payment_method store",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoic2FhZEBnbWFpbC5jb20iLCJpYXQiOjE1ODAwNTY0MzAsImV4cCI6MTU4MDA2MDAzMH0.D9q6FQN1IAj4uiskyj31qlzX-4qtaxCYhyhuiqSTBi0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/payment_method",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"payment_method"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Payment_method",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoic2FhZEBnbWFpbC5jb20iLCJpYXQiOjE1ODAwNTY3NjQsImV4cCI6MTU4MDA2MDM2NH0.XCD3kEpr9yVlyPn7eJfqfvivEWrYjIpsu9LMtwUhgYw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"payment_name\":\"test add payment method\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/payment_method",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"payment_method"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Payment_method",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoic2FhZEBnbWFpbC5jb20iLCJpYXQiOjE1ODAwNTY3NjQsImV4cCI6MTU4MDA2MDM2NH0.XCD3kEpr9yVlyPn7eJfqfvivEWrYjIpsu9LMtwUhgYw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"payment_name\":\"test edit payment method\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/payment_method/7",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"payment_method",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Payment_method",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/payment_method/7",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"payment_method",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Guide_text",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/guide_text",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"guide_text"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Guide_text",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInJvbGUiOiJhZG1pbiIsInVzZXJuYW1lIjoiYWRtaW4iLCJzdG9yZV9pZCI6bnVsbCwiaWF0IjoxNTgwMDYyMDEzLCJleHAiOjE1ODAwNjU2MTN9.xaqyQtkvEXNAGza2ihKgKzkIw-1kOxlYykb-2bD3Sr8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"test add guide text\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/guide_text",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"guide_text"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Guide_text",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInJvbGUiOiJhZG1pbiIsInVzZXJuYW1lIjoiYWRtaW4iLCJzdG9yZV9pZCI6bnVsbCwiaWF0IjoxNTgwMDYyMDEzLCJleHAiOjE1ODAwNjU2MTN9.xaqyQtkvEXNAGza2ihKgKzkIw-1kOxlYykb-2bD3Sr8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"test edit guide text\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/guide_text/8",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"guide_text",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Guide_text",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInJvbGUiOiJhZG1pbiIsInVzZXJuYW1lIjoiYWRtaW4iLCJzdG9yZV9pZCI6bnVsbCwiaWF0IjoxNTgwMDYyMDEzLCJleHAiOjE1ODAwNjU2MTN9.xaqyQtkvEXNAGza2ihKgKzkIw-1kOxlYykb-2bD3Sr8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/guide_text/8",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"guide_text",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Bank user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/bank/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"bank",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Bank store",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoic2FhZEBnbWFpbC5jb20iLCJzdG9yZV9pZCI6MywiaWF0IjoxNTgwMDYyODEzLCJleHAiOjE1ODAwNjY0MTN9.XeeMBTxFOmhjmeBjYu_UPpONZ0yFdJb66AH-h3XGYUo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/bank",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"bank"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Bank",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoic2FhZEBnbWFpbC5jb20iLCJzdG9yZV9pZCI6MywiaWF0IjoxNTgwMDYyODEzLCJleHAiOjE1ODAwNjY0MTN9.XeeMBTxFOmhjmeBjYu_UPpONZ0yFdJb66AH-h3XGYUo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"bank_name\":\"test add bank\",\n\t\"account_name\":\"test add account name\",\n\t\"account_number\":\"1234567890\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/bank",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"bank"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Bank",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoic2FhZEBnbWFpbC5jb20iLCJzdG9yZV9pZCI6MywiaWF0IjoxNTgwMDYyODEzLCJleHAiOjE1ODAwNjY0MTN9.XeeMBTxFOmhjmeBjYu_UPpONZ0yFdJb66AH-h3XGYUo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"bank_name\":\"test edit bank\",\n\t\"account_name\":\"test edit account name\",\n\t\"account_number\":\"0987654321\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/bank/7",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"bank",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Bank",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoic2FhZEBnbWFpbC5jb20iLCJzdG9yZV9pZCI6MywiaWF0IjoxNTgwMDYyODEzLCJleHAiOjE1ODAwNjY0MTN9.XeeMBTxFOmhjmeBjYu_UPpONZ0yFdJb66AH-h3XGYUo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/bank/7",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"bank",
+						"7"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
