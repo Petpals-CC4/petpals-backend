@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    
+
     return queryInterface.bulkInsert('users', [
       {
         password: 'sommaipass',
@@ -93,10 +93,10 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        password: 'jamepass',
+        password: '$2a$11$DkmGpgc.cskXkOv39cMx6.Kn0yDhNldqjN70qeUWCitXlsX6Y2d8q', // hansapass
         firstname: 'เจมส์',
         lastname: 'หาญกล้า',
-        email: 'jame@gmail.com',
+        email: 'user',
         phone: '0998887779',
         profile_image_url: 'https://making-the-web.com/sites/default/files/clipart/148583/cartoon-man-face-148583-7316849.jpg',
         role: 'user',
@@ -104,40 +104,40 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        password: 'ponraapass',
+        password: '$11$w4/uO74OL.auGBooPqiGk.AUVQWAu8tnLNPWVeEGxgecqCV4arm0i',//ponraapass
         firstname: 'พอลล่า',
         lastname: 'จับจิต',
         email: 'ponraa@gmail.com',
         phone: '0998887780',
         profile_image_url: 'https://cdn1.vectorstock.com/i/1000x1000/06/45/man-face-pop-art-cartoon-vector-19080645.jpg',
-        role: 'user',
+        role: 'store',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        password: 'hansapass',
+        password: '$2a$11$DkmGpgc.cskXkOv39cMx6.Kn0yDhNldqjN70qeUWCitXlsX6Y2d8q',//hansapass
         firstname: 'หรรษา',
         lastname: 'ขย่มโลก',
         email: 'hansa@gmail.com',
         phone: '0998887781',
         profile_image_url: 'https://previews.123rf.com/images/farhad73/farhad731807/farhad73180700006/104271850-man-cartoon-face-with-glasses-vector-illustration-.jpg',
-        role: 'user',
+        role: 'store',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        password: 'saadpass',
+        password: '$2a$11$jWOF2TC1pwxLSIg97i2DquxS6q9ySSMJm6sa8vk6d/3vEZMSokae.',//saadpass
         firstname: 'สะอาด',
         lastname: 'จริงจริงนะ',
         email: 'saad@gmail.com',
         phone: '0998887782',
         profile_image_url: 'https://cdn4.vectorstock.com/i/1000x1000/77/43/young-man-head-avatar-cartoon-face-character-vector-21757743.jpg',
-        role: 'user',
+        role: 'store',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        password: 'admin',
+        password: '$2a$11$W8a7KBOzLyZC/n38ZoKeI.KvE0nxo/QxVdkC3azGEFYPj3FQBp26y',//admin
         firstname: 'Wat',
         lastname: 'Size',
         email: 'admin',

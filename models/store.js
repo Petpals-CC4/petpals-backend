@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     store.hasMany(models.store_image, {foreignKey: 'store_id'})
     store.hasMany(models.bank, {foreignKey: 'store_id'})
     store.hasMany(models.service, {foreignKey: 'store_id'})
+    store.hasMany(models.payment_method, {foreignKey: 'store_id'})
   }
   return store
 }
