@@ -130,7 +130,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInJvbGUiOiJ1c2VyIiwidXNlcm5hbWUiOiJ3YXQiLCJpYXQiOjE1Nzk3MDA1OTIsImV4cCI6MTU3OTcwNDE5Mn0.HenTWBLeZmWP_Z-47XEwK0-3RcBkXWpv-A5lCGk7XcM",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwicm9sZSI6InVzZXIiLCJ1c2VybmFtZSI6InVzZXIiLCJzdG9yZV9pZCI6bnVsbCwiaWF0IjoxNTgwMTEzMjQ1LCJleHAiOjE1ODAxMTY4NDV9.LGwR2lWpAd-XQuIDhzx3_heqIYo2vlH7hcWjggiCNVE",
 							"type": "string"
 						}
 					]
@@ -1123,6 +1123,122 @@
 					"path": [
 						"bank",
 						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Feedback",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwicm9sZSI6InVzZXIiLCJ1c2VybmFtZSI6InVzZXIiLCJzdG9yZV9pZCI6bnVsbCwiaWF0IjoxNTgwMTEzMjQ1LCJleHAiOjE1ODAxMTY4NDV9.LGwR2lWpAd-XQuIDhzx3_heqIYo2vlH7hcWjggiCNVE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"rating\": 5,\n    \"comment\": \"test comment feedback\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/feedback/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"feedback",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Feedback",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwicm9sZSI6InVzZXIiLCJ1c2VybmFtZSI6InVzZXIiLCJzdG9yZV9pZCI6bnVsbCwiaWF0IjoxNTgwMTEzMjQ1LCJleHAiOjE1ODAxMTY4NDV9.LGwR2lWpAd-XQuIDhzx3_heqIYo2vlH7hcWjggiCNVE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"rating\": 3,\n    \"comment\": \"test edit comment feedback\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/feedback/11",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"feedback",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Feedback",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwicm9sZSI6InVzZXIiLCJ1c2VybmFtZSI6InVzZXIiLCJzdG9yZV9pZCI6bnVsbCwiaWF0IjoxNTgwMTEzMjQ1LCJleHAiOjE1ODAxMTY4NDV9.LGwR2lWpAd-XQuIDhzx3_heqIYo2vlH7hcWjggiCNVE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/feedback/11",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"feedback",
+						"11"
 					]
 				}
 			},

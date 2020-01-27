@@ -2,19 +2,31 @@ const passport = require("passport");
 const { findStoreIDbyUserID } = require("../utils");
 
 module.exports = (app, db) => {
-  app.get("/payment_method/:store_id", async (req, res) => {
-    let result = await db.payment_method.findAll({
-      where: {
-        store_id: req.params.store_id
-      },
-      attributes: ["id", "payment_name"]
-    });
-    if (!result) {
-      res.status(404).send({ message: "Not found payment_method by store id" });
-    } else {
-      res.status(200).send(result);
+  app.get(
+    "/payment_method/:store_id",
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+      if (req.user.role === "user") {
+        let result = await db.payment_method.findAll({
+          where: {
+            store_id: req.params.store_id
+          },
+          attributes: ["id", "payment_name"]
+        });
+        if (!result) {
+          res
+            .status(404)
+            .send({ message: "Not found payment_method by store id" });
+        } else {
+          res.status(200).send(result);
+        }
+      } else {
+        res.status(401).send({
+          message: "Unauthorized"
+        });
+      }
     }
-  });
+  );
 
   app.get(
     "/payment_method",
@@ -83,12 +95,10 @@ module.exports = (app, db) => {
               payment_name: req.body.payment_name
             });
             // console.log(payment_method);
-            res
-              .status(200)
-              .send({
-                message: "Update Success",
-                ...payment_method.dataValues
-              });
+            res.status(200).send({
+              message: "Update Success",
+              ...payment_method.dataValues
+            });
           } catch (error) {
             res.status(400).send({ message: error.errors[0].message });
           }
