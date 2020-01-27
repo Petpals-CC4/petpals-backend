@@ -106,7 +106,7 @@ module.exports = (app, db, Op) => {
     }
   });
 
-  app.get( 
+  app.get(
     "/order",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
@@ -138,6 +138,59 @@ module.exports = (app, db, Op) => {
       }
     }
   );
+
+  app.post(
+    "/order",
+    passport.authenticate("jwt", {
+      session: false
+    }),
+    async (req, res) => {
+      ;
+      const user_id = req.user.id
+      const user_role = req.user.role
+      if (user_role === "user") {
+        const orderRequest = req.body
+        try {
+          const createdOrder = await db.order.create({
+            user_id,
+            store_id: orderRequest.store_id,
+            payment_method_id: orderRequest.payment_method_id,
+            status_id: 1, // waiting_payment
+            start_date: new Date(orderRequest.start_date),
+            end_date: new Date(orderRequest.end_date),
+            slip_image: null, // at the first in waiting_payment we will not have slip_images
+            booking_price: orderRequest.booking_price,
+            total_price: orderRequest.total_price
+          });
+          const orderId = await createdOrder.id;
+          console.log(orderId);
+
+          const service_ids = orderRequest.service_ids
+          console.log(service_ids); // expect [] type
+          for (let index = 0; index < service_ids.length; index++) {
+            const findServicePrice = await db.service.findOne({
+              where: { id: service_ids[index] },
+              attributes: ["service_price"]
+            });
+            const servicePrice = await findServicePrice.service_price;
+            console.log("Service_id:", service_ids[index], "Price:", servicePrice);
+
+            await db.order_service.create({
+              service_price: servicePrice,
+              service_id: `${service_ids[index]}`,
+              order_id: `${orderId}`
+            });
+          }
+          res.status(201).send({ message: "Order Created" })
+
+        } catch (error) {
+          res.status(400).send({ message: error })
+        }
+      } else {
+        res.status(401).send({ message: "Unauthorized" });
+      }
+    }
+  )
 
   app.delete(
     "/order/:id",
