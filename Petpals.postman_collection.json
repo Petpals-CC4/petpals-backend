@@ -1243,6 +1243,113 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "POST Shopdetail (order)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwicm9sZSI6InVzZXIiLCJ1c2VybmFtZSI6InVzZXIiLCJzdG9yZV9pZCI6bnVsbCwiaWF0IjoxNTgwMTI2NTQ0LCJleHAiOjE1ODAxMzAxNDR9.muG2QQEQJpaCmz8sc-5CCLTAuWlvhdQDaEG6htgKLuU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n                \"user_id\" : \"9\",\r\n                \"service_id\": \"1\",\r\n                \"start_date\": \"2020-01-15\",\r\n                \"end_date\": \"2020-01-30\",\r\n                \"payment_name\": \"1\",\r\n                \"booking_price\": \"1500\",\r\n                \"total_price\": \"5000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/shopdetail/2/payment",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"shopdetail",
+						"2",
+						"payment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Order user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwicm9sZSI6InVzZXIiLCJ1c2VybmFtZSI6InVzZXIiLCJzdG9yZV9pZCI6bnVsbCwiaWF0IjoxNTgwMTI1OTM0LCJleHAiOjE1ODAxMjk1MzR9.e9PP9NYS8PSbx0LgbZ2ei6sV-IHJL5k3GkgMXfiv9h0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/order/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"order",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwicm9sZSI6InVzZXIiLCJ1c2VybmFtZSI6InVzZXIiLCJzdG9yZV9pZCI6bnVsbCwiaWF0IjoxNTgwMTI3ODU0LCJleHAiOjE1ODAxMzE0NTR9.U6Ys0-RwYPFU_uEuJWZT0FBE0egtAHz9Nu1ZdKKPhzQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/order",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"order"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
