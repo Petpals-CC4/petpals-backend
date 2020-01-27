@@ -106,45 +106,35 @@ module.exports = (app, db, Op) => {
     }
   });
 
-  app.get(
-    "/order/:store_id",
+  app.get( 
+    "/order",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
       if (req.user.role === "user") {
         let result = await db.order.findAll({
           where: {
-            store_id: req.params.store_id
+            user_id: req.user.id
           }
         });
         if (!result) {
-          res.status(404).send({ message: "Not found order by store id" });
+          res.status(404).send({ message: "Not found order" });
         } else {
           res.status(200).send(result);
         }
       } else {
-        res.status(401).send({
-          message: "Unauthorized"
-        });
-      }
-    }
-  );
-
-  app.get(
-    "/order",
-    passport.authenticate("jwt", { session: false }),
-    async (req, res) => {
-      const store_id = await findStoreIDbyUserID(db, req.user.id);
-      if (store_id !== null) {
-        let result = await db.order.findAll({
-          where: { store_id }
-        });
-        if (!result) {
-          res.status(404).send({ message: "Order method Not Found" });
+        const store_id = await findStoreIDbyUserID(db, req.user.id);
+        if (store_id !== null) {
+          let result = await db.order.findAll({
+            where: { store_id }
+          });
+          if (!result) {
+            res.status(404).send({ message: "Order method Not Found" });
+          } else {
+            res.status(200).send(result);
+          }
         } else {
-          res.status(200).send(result);
+          res.status(401).send({ message: "Unauthorized" });
         }
-      } else {
-        res.status(401).send({ message: "Unauthorized" });
       }
     }
   );

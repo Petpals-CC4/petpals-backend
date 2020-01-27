@@ -1245,34 +1245,6 @@
 			"response": []
 		},
 		{
-			"name": "GET Order user",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwicm9sZSI6InVzZXIiLCJ1c2VybmFtZSI6InVzZXIiLCJzdG9yZV9pZCI6bnVsbCwiaWF0IjoxNTgwMTI2NTQ0LCJleHAiOjE1ODAxMzAxNDR9.muG2QQEQJpaCmz8sc-5CCLTAuWlvhdQDaEG6htgKLuU",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/order/2",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"order",
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "POST Shopdetail (order)",
 			"request": {
 				"auth": {
@@ -1346,14 +1318,14 @@
 			"response": []
 		},
 		{
-			"name": "GET Order store",
+			"name": "GET Order",
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsInJvbGUiOiJzdG9yZSIsInVzZXJuYW1lIjoiaGFuc2FAZ21haWwuY29tIiwic3RvcmVfaWQiOjIsImlhdCI6MTU4MDEyNjU3NSwiZXhwIjoxNTgwMTMwMTc1fQ.7Y3Sx3kJhsph-dWY0ybl4_hrztk37Ff7JEXDF5hYlAg",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwicm9sZSI6InVzZXIiLCJ1c2VybmFtZSI6InVzZXIiLCJzdG9yZV9pZCI6bnVsbCwiaWF0IjoxNTgwMTI3ODU0LCJleHAiOjE1ODAxMzE0NTR9.U6Ys0-RwYPFU_uEuJWZT0FBE0egtAHz9Nu1ZdKKPhzQ",
 							"type": "string"
 						}
 					]
