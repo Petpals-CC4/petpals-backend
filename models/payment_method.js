@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   })
   payment_method.associate = (models) => {
     payment_method.hasOne(models.order, { foreignKey: 'payment_method_id'})
+    payment_method.belongsTo(models.store, { foreignKey: 'store_id' })
   }
 
   return payment_method
