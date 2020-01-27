@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    
+
     return queryInterface.bulkInsert('users', [
       {
         password: 'sommaipass',
@@ -93,10 +93,10 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        password: 'jamepass',
+        password: '$2a$11$DkmGpgc.cskXkOv39cMx6.Kn0yDhNldqjN70qeUWCitXlsX6Y2d8q', // hansapass
         firstname: 'เจมส์',
         lastname: 'หาญกล้า',
-        email: 'jame@gmail.com',
+        email: 'user',
         phone: '0998887779',
         profile_image_url: 'https://making-the-web.com/sites/default/files/clipart/148583/cartoon-man-face-148583-7316849.jpg',
         role: 'user',
