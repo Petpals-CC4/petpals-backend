@@ -1,43 +1,47 @@
 const passport = require("passport");
 const { findStoreIDbyUserID } = require("../utils");
 
+const getStoreBio = async (db, req, res) => {
+  const store_id = await findStoreIDbyUserID(db, req.user.id);
+  const Store = await db.store.findOne({
+    where: { id: store_id ? store_id : req.params.store_id },
+    attributes: ["id", "store_name", "store_description"],
+    include: [
+      {
+        model: db.store_image,
+        attributes: ["image_url"]
+      },
+      {
+        model: db.user,
+        attributes: ["profile_image_url"]
+      }
+    ]
+  })
+  if (!Store) {
+    res.status(404).json({ message: "Not Found" })
+  } else {
+    let store = { ...Store.dataValues }
+    let returnDataStore = {
+      id: store.id,
+      store_name: store.store_name,
+      store_description: store.store_description,
+      store_images: store.store_images.map(item => item.image_url),
+      profile_image_url: store.user.profile_image_url
+    }
+    res.status(200).json(returnDataStore)
+  }
+}
+
 module.exports = (app, db) => {
   app.get("/store_bio",
     passport.authenticate("jwt", { session: false }),
-    async (req, res) => {
-      const store_id = await findStoreIDbyUserID(db, req.user.id);
-      if (store_id !== null) {
-        const Store = await db.store.findOne({
-          where: { id: store_id },
-          attributes: ["id", "store_name", "store_description"],
-          include: [
-            {
-              model: db.store_image,
-              attributes: ["image_url"]
-            },
-            {
-              model: db.user,
-              attributes: ["profile_image_url"]
-            }
-          ]
-        })
-        if (!Store) {
-          res.status(404).json({ message: "Not Found" })
-        } else {
-          let store = { ...Store.dataValues }
-          let returnDataStore = {
-            id: store.id,
-            store_name: store.store_name,
-            store_description: store.store_description,
-            store_images: store.store_images.map(item => item.image_url),
-            profile_image_url: store.user.profile_image_url
-          }
-          res.status(200).json(returnDataStore)
-        }
-      } else {
-        res.status(401).send({ message: "Unauthorized" });
-      }
-    })
+    async (req, res) => { getStoreBio(db, req, res) }
+  )
+
+  app.get("/store_bio/:store_id",
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => { getStoreBio(db, req, res) }
+  )
 
   app.get("/store/:id", async (req, res) => {
     const Store = await db.store.findOne({
