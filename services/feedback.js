@@ -108,4 +108,90 @@ module.exports = (app, db) => {
       }
     }
   )
+
+  app.post(
+    "/feedback/:store_id",
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+      if (req.user.role === "user") {
+        let result = await db.feedback.create({
+          store_id: req.params.store_id,
+          rating: req.body.rating,
+          comment: req.body.comment,
+          user_id: req.user.id
+        });
+        if (!result) {
+          res.status(400).json({
+            message: "Cannot Feedback, please check your body request"
+          });
+        } else {
+          res.status(201).json(result);
+        }
+      } else {
+        res.status(401).send({
+          message: "Unauthorized"
+        });
+      }
+    }
+  );
+
+  app.put(
+    "/feedback/:id",
+    passport.authenticate("jwt", {
+      session: false
+    }),
+    async (req, res) => {
+      const id = req.params.id;
+      const user_id = await req.user.id;
+      if (user_id !== null) {
+        const feedbackFound = await db.feedback.findOne({
+          where: { user_id, id }
+        });
+        if (!feedbackFound) {
+          res.status(404).send({ message: "Error: Not Found" });
+        } else {
+          try {
+            const feedback = await feedbackFound.update({
+              rating: req.body.rating,
+              comment: req.body.comment
+            });
+            // console.log(feedback);
+            res.status(200).send({
+              message: "Update Success",
+              ...feedback.dataValues
+            });
+          } catch (error) {
+            res.status(400).send({ message: error.errors[0].message });
+          }
+        }
+      } else {
+        res.status(401).send({ message: "Unauthorized" });
+      }
+    }
+  );
+
+  app.delete(
+    "/feedback/:id",
+    passport.authenticate("jwt", {
+      session: false
+    }),
+    async (req, res) => {
+      const id = req.params.id;
+      const user_id = await req.user.id;
+      if (user_id !== null) {
+        const feedbackFound = await db.feedback.findOne({
+          where: { user_id, id }
+        });
+        if (!feedbackFound) {
+          res.status(404).send({ message: "Error: Not Found" });
+        } else {
+          await feedbackFound.destroy();
+          // console.log(feedback);
+          res.status(200).send({ message: "Delete Success" });
+        }
+      } else {
+        res.status(401).send({ message: "Unauthorized" });
+      }
+    }
+  );
 }
