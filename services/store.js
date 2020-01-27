@@ -1,7 +1,45 @@
 const passport = require("passport");
-module.exports = (app, db) => {
-  app.get("/shop_detail/:id", async (req, res) => {
+const { findStoreIDbyUserID } = require("../utils");
 
+module.exports = (app, db) => {
+  app.get("/store_bio",
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+      const store_id = await findStoreIDbyUserID(db, req.user.id);
+      if (store_id !== null) {
+        const Store = await db.store.findOne({
+          where: { id: store_id },
+          attributes: ["id", "store_name", "store_description"],
+          include: [
+            {
+              model: db.store_image,
+              attributes: ["image_url"]
+            },
+            {
+              model: db.user,
+              attributes: ["profile_image_url"]
+            }
+          ]
+        })
+        if (!Store) {
+          res.status(404).json({ message: "Not Found" })
+        } else {
+          let store = { ...Store.dataValues }
+          let returnDataStore = {
+            id: store.id,
+            store_name: store.store_name,
+            store_description: store.store_description,
+            store_images: store.store_images.map(item => item.image_url),
+            profile_image_url: store.user.profile_image_url
+          }
+          res.status(200).json(returnDataStore)
+        }
+      } else {
+        res.status(401).send({ message: "Unauthorized" });
+      }
+    })
+
+  app.get("/store/:id", async (req, res) => {
     const Store = await db.store.findOne({
       where: { id: req.params.id },
       attributes: ["id", "store_name", "store_description"],
@@ -47,16 +85,15 @@ module.exports = (app, db) => {
         }
       ]
     })
-    if(!Store) {
-      res.status(404).json({message: "Not Found"})
+    if (!Store) {
+      res.status(404).json({ message: "Not Found" })
     } else {
       let store = { ...Store.dataValues }
       let scoreArray = store.feedbacks.map(item => item.rating)
       let score = 0.0
-      for(let scoreItem of scoreArray) {
+      for (let scoreItem of scoreArray) {
         score += scoreItem
       }
-      
       let returnDataStore = {
         id: store.id,
         store_name: store.store_name,
@@ -74,39 +111,38 @@ module.exports = (app, db) => {
         service: store.services,
         profile_image_url: store.user.profile_image_url
       }
-  
       res.status(200).json(returnDataStore)
     }
-
   })
 
   app.put(
-    "/store/:id",
+    "/store",
     passport.authenticate("jwt", { session: false }),
-
     async (req, res) => {
-      const id = req.params.id;
-      const user_id = req.user.id;
-
-      const storeFound = await db.store.findOne({
-        where: { user_id, id }
-      });
-      if (!storeFound) {
-        res.status(404).send({ message: "Error: Not Found" });
-      } else {
-        try {
-          const store = await storeFound.update({
-            store_name: req.body.store_name,
-            store_description: req.body.store_description
-          });
-          console.log(store);
-          res
-            .status(200)
-            .send({ message: "Update Success", ...store.dataValues });
-        } catch (error) {
-          // res.status(400).send({ message: "store name cannot be empty." })
-          res.status(400).send({ message: error.errors[0].message });
+      const store_id = await findStoreIDbyUserID(db, req.user.id);
+      if (store_id !== null) {
+        const storeFound = await db.store.findOne({
+          where: { id: store_id }
+        });
+        if (!storeFound) {
+          res.status(404).send({ message: "Error: Not Found" });
+        } else {
+          try {
+            const store = await storeFound.update({
+              store_name: req.body.store_name,
+              store_description: req.body.store_description
+            });
+            console.log(store);
+            res
+              .status(200)
+              .send({ message: "Update Success", ...store.dataValues });
+          } catch (error) {
+            // res.status(400).send({ message: "store name cannot be empty." })
+            res.status(400).send({ message: error.errors[0].message });
+          }
         }
+      } else {
+        res.status(401).send({ message: "Unauthorized" });
       }
     }
   );
