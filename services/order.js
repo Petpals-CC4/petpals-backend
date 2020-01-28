@@ -193,6 +193,8 @@ module.exports = (app, db, Op) => {
             start_date: new Date(orderRequest.start_date),
             end_date: new Date(orderRequest.end_date),
             slip_image: null, // at the first in waiting_payment we will not have slip_images
+            slip_upload_date: null,
+            slip_upload_time: null,
             booking_price: orderRequest.booking_price,
             total_price: orderRequest.total_price
           });
@@ -280,7 +282,8 @@ module.exports = (app, db, Op) => {
                 {
                   slip_image: slipImage.filename,
                   slip_upload_date: transfer_date,
-                  slip_upload_time: transfer_time
+                  slip_upload_time: transfer_time,
+                  status_id: 2
                 },
                 {
                   where: {
@@ -312,4 +315,32 @@ module.exports = (app, db, Op) => {
       }
     }
   );
+
+  app.put("/admin/update_status",
+    passport.authenticate("jwt", {
+      session: false
+    }),
+    async (req, res) => {
+      try {
+        if (req.user.role === "admin") {
+          const foundUser = await db.user.findOne({
+            where: {
+              id: req.body.user_id
+            }
+          })
+          if (!foundUser) {
+            res.status(404).send({ message: "Error: User Not Found" });
+          } else {
+            let userStatus = await foundUser.status
+            const updatedUserStatus = await foundUser.update({
+              status: userStatus === "active" ? "banned" : "active"
+            })
+            res.status(200).send({ message: "User Status Updated" });
+          }
+        }
+      } catch (error) {
+        res.status(500).send(error)
+      }
+    }
+  )
 };
