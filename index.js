@@ -24,13 +24,15 @@ const paymentMethodService = require('./services/payment_method')
 const db = require('./models');
 const Op = Sequelize.Op
 
+app.use(cors())
+app.use(express.static('uploads'));
 app.use(passport.initialize());
 app.use(bodyParser.json());
-app.use(cors())
+app.use(bodyParser.urlencoded({ extended: true }));
 
 require('./config/passport')
 
-db.sequelize.sync({ force: true, alter: false }).then(() => {
+db.sequelize.sync({ force: false, alter: false }).then(() => {
 
   bankService(app, db)
   feedbackService(app, db)
@@ -44,7 +46,7 @@ db.sequelize.sync({ force: true, alter: false }).then(() => {
   paymentMethodService(app, db)
 
   app.use("/healthCheck", (req, res, next) => {
-    res.status(200).json({ message: "ok"})
+    res.status(200).json({ message: "ok" })
   })
 
   app.listen(PORT, () => {

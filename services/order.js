@@ -1,5 +1,39 @@
 const passport = require("passport");
 const { findStoreIDbyUserID } = require("../utils");
+const multer = require('multer')
+const fs = require('fs');
+const dir = './uploads';
+
+const env = process.env.NODE_ENV || 'development'
+const config = require('../config/config.json')[env];
+const PROTOCOL = config.protocol
+const HOST = config.host
+const PORT = config.app_port
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir);
+    }
+    cb(null, dir)
+  },
+  filename: (req, file, cb) => {
+    let imageExtension = file.originalname.split('.').pop();
+    let imageName = new Date().getTime() + `.${imageExtension}`;
+    cb(null, imageName)
+  }
+})
+const upload = multer({
+  storage,
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg" || file.mimetype == "image/gif") {
+      cb(null, true);
+    } else {
+      cb(null, false);
+      return cb(new Error('Allowed only .png, .jpg, .jpeg and .gif'));
+    }
+  }
+})
 
 module.exports = (app, db, Op) => {
   app.post("/shopdetail/:id/payment", async (req, res) => {
@@ -213,6 +247,68 @@ module.exports = (app, db, Op) => {
         }
       } else {
         res.status(401).send({ message: "Unauthorized" });
+      }
+    }
+  );
+
+  // app.post("/uptest", upload.single("slip_image"), async (req, res) => {
+  //   res.status(200).send({ message: "Uploaded", file: req.file })
+  // })
+
+  app.post("/upload_slip_image",
+    passport.authenticate("jwt", {
+      session: false
+    }),
+    upload.single("slip_image"),
+    async (req, res) => {
+      if (req.user.role === "user") {
+        const {
+          order_id,
+          transfer_date,
+          transfer_time
+        } = req.body
+        if (order_id && transfer_date && transfer_time) {
+          try {
+            // console.log(req.file);
+            if (!req.file) {
+              res.status(400).send({
+                message: "No file uploaded"
+              });
+            } else {
+              let slipImage = req.file;
+              const orderUpdated = await db.order.update(
+                {
+                  slip_image: slipImage.filename,
+                  slip_upload_date: transfer_date,
+                  slip_upload_time: transfer_time
+                },
+                {
+                  where: {
+                    id: order_id
+                  }
+                }
+              );
+              if (!orderUpdated) {
+                res.status(404).send({ message: "Error: Not Found" });
+              } else {
+                console.log(orderUpdated[0]);
+                res.status(200).send({
+                  message: "Slip image is uploaded",
+                  image_url: `${PROTOCOL}://${HOST}:${PORT}/${slipImage.filename}`
+                });
+              }
+            }
+          } catch (err) {
+            console.log(err);
+            res.status(500).send(err);
+          }
+        } else {
+          // console.log(req.file.filename);
+          fs.unlinkSync(`${dir}/${req.file.filename}`);
+          res.status(400).send({ message: "Bad Request" })
+        }
+      } else {
+        res.status(401).send({ message: "Unauthorized" })
       }
     }
   );
