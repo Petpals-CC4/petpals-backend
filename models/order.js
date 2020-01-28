@@ -15,6 +15,12 @@ module.exports = (sequelize, DataTypes) => {
     total_price: {
       type: DataTypes.DECIMAL(10, 2)
     },
+    slip_upload_date: {
+      type: DataTypes.STRING(255)
+    },
+    slip_upload_time: {
+      type: DataTypes.STRING(255)
+    }
   })
 
   order.associate = (models) => {
@@ -23,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     order.belongsTo(models.order_status, {foreignKey: 'status_id'})
     order.belongsToMany(models.service, {foreignKey: 'order_id', through: 'order_service'})
     order.belongsTo(models.payment_method, {foreignKey: 'payment_method_id'})
+    order.belongsTo(models.bank, {foreignKey: 'bank_id'})
   }
   return order
 }
