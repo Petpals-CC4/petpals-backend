@@ -193,6 +193,8 @@ module.exports = (app, db, Op) => {
             start_date: new Date(orderRequest.start_date),
             end_date: new Date(orderRequest.end_date),
             slip_image: null, // at the first in waiting_payment we will not have slip_images
+            slip_upload_date: null,
+            slip_upload_time: null,
             booking_price: orderRequest.booking_price,
             total_price: orderRequest.total_price
           });
@@ -280,7 +282,8 @@ module.exports = (app, db, Op) => {
                 {
                   slip_image: slipImage.filename,
                   slip_upload_date: transfer_date,
-                  slip_upload_time: transfer_time
+                  slip_upload_time: transfer_time,
+                  status_id: 2
                 },
                 {
                   where: {
