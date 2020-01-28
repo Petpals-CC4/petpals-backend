@@ -11,8 +11,17 @@ module.exports = (app, db) => {
     }
   });
 
+  app.get("/admin/guide_text", async (req, res) => {
+    const result = await db.guide_text.findAll({});
+    if (!result) {
+      res.status(400).json({ message: error.message });
+    } else {
+      res.status(200).json(result);
+    }
+  });
+
   app.post(
-    "/guide_text",
+    "/admin/guide_text",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
       if (req.user.role === "admin") {
@@ -36,7 +45,7 @@ module.exports = (app, db) => {
   );
 
   app.put(
-    "/guide_text/:id",
+    "/admin/guide_text/:id",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
       const id = req.params.id;
@@ -67,7 +76,7 @@ module.exports = (app, db) => {
   );
 
   app.delete(
-    "/guide_text/:id",
+    "/admin/guide_text/:id",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
       const id = req.params.id;
