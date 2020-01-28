@@ -147,12 +147,12 @@ module.exports = (app, db, Op) => {
 
   app.get(
     "/service",
-    passport.authenticate("jwt", { session: false }),
+    // passport.authenticate("jwt", { session: false }),
     async (req, res) => {
-      const store_id = await findStoreIDbyUserID(db, req.user.id);
+      // const store_id = await findStoreIDbyUserID(db, req.user.id);
       let result = await db.service.findAll({
         where: {
-          store_id
+          store_id: 1
         }
       });
       if (!result) {
@@ -219,13 +219,13 @@ module.exports = (app, db, Op) => {
 
   app.delete(
     "/service/:id",
-    passport.authenticate("jwt", { session: false }),
+    // passport.authenticate("jwt", { session: false }),
     async (req, res) => {
       const id = req.params.id;
-      const store_id = await findStoreIDbyUserID(db, req.user.id);
+      // const store_id = await findStoreIDbyUserID(db, req.user.id);
 
       const serviceFound = await db.service.findOne({
-        where: { store_id, id }
+        where: { store_id: 1, id }
       });
       if (!serviceFound) {
         res.status(404).send({ message: "Error: Not Found" });
