@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
 
   bank.associate = (models) => {
     bank.belongsTo(models.store, {foreignKey: 'store_id'})
+    bank.hasOne(models.order, {foreignKey: 'bank_id'})
   }
   return bank
 }
