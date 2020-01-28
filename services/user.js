@@ -6,7 +6,13 @@ const { findStoreIDbyUserID } = require("../utils");
 
 const getUser = async (db, req, res, mode = "user") => {
   const User = await db.user.findAll({
-    attributes: ["id", "email", "firstname", "lastname", "role"]
+    attributes: ["id", "email", "firstname", "lastname", "role", "status"],
+    include: [
+      {
+        model: db.store,
+        attributes: ['id', 'store_name', 'store_description']
+      }
+    ]
   });
   if (!User) {
     res.status(404).json({ message: "Not Found" });
@@ -16,7 +22,11 @@ const getUser = async (db, req, res, mode = "user") => {
         id: user.id,
         email: user.email,
         firstname: user.firstname,
-        lastname: user.lastname
+        lastname: user.lastname,
+        status: user.status,
+        store_id: user.store ? user.store.id : null,
+        store_name: user.store ? user.store.store_name : null,
+        store_description: user.store ? user.store.store_description : null
       };
     });
     res.status(200).json(userLean);
