@@ -12,6 +12,7 @@ module.exports = {
         phone: '0998887771',
         profile_image_url: 'https://img.icons8.com/plasticine/2x/user.png',
         role: 'user',
+        status: 'active',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -23,6 +24,7 @@ module.exports = {
         phone: '0998887772',
         profile_image_url: 'https://icons-for-free.com/iconfiles/png/512/casual+male+man+person+user+icon-1320196226197493271.png',
         role: 'user',
+        status: 'active',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -34,6 +36,7 @@ module.exports = {
         phone: '0998887773',
         profile_image_url: 'https://upload.wikimedia.org/wikipedia/commons/3/38/Wikipedia_User-ICON_byNightsight.png',
         role: 'user',
+        status: 'active',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -45,6 +48,7 @@ module.exports = {
         phone: '0998887774',
         profile_image_url: 'https://cdn1.iconfinder.com/data/icons/character-2/107/8-512.png',
         role: 'user',
+        status: 'active',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -67,6 +71,7 @@ module.exports = {
         phone: '0998887776',
         profile_image_url: 'https://cdn3.vectorstock.com/i/1000x1000/44/02/happy-young-man-smile-profile-cartoon-character-vector-18864402.jpg',
         role: 'user',
+        status: 'active',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -78,6 +83,7 @@ module.exports = {
         phone: '0998887777',
         profile_image_url: 'https://cdn2.vectorstock.com/i/1000x1000/28/96/young-man-face-cartoon-design-vector-9772896.jpg',
         role: 'user',
+        status: 'active',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -89,6 +95,7 @@ module.exports = {
         phone: '0998887778',
         profile_image_url: 'https://cdn3.vectorstock.com/i/1000x1000/90/17/indian-man-face-avatar-cartoon-vector-25919017.jpg',
         role: 'user',
+        status: 'active',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -100,6 +107,19 @@ module.exports = {
         phone: '0998887779',
         profile_image_url: 'https://making-the-web.com/sites/default/files/clipart/148583/cartoon-man-face-148583-7316849.jpg',
         role: 'user',
+        status: 'active',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        password: '$2a$11$DkmGpgc.cskXkOv39cMx6.Kn0yDhNldqjN70qeUWCitXlsX6Y2d8q', // hansapass
+        firstname: 'บังอร',
+        lastname: 'หาญชัย',
+        email: 'user_banned',
+        phone: '0998887779',
+        profile_image_url: 'https://making-the-web.com/sites/default/files/clipart/148583/cartoon-man-face-148583-7316849.jpg',
+        role: 'user',
+        status: 'banned',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -111,6 +131,7 @@ module.exports = {
         phone: '0998887780',
         profile_image_url: 'https://cdn1.vectorstock.com/i/1000x1000/06/45/man-face-pop-art-cartoon-vector-19080645.jpg',
         role: 'store',
+        status: 'active',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -122,6 +143,7 @@ module.exports = {
         phone: '0998887781',
         profile_image_url: 'https://previews.123rf.com/images/farhad73/farhad731807/farhad73180700006/104271850-man-cartoon-face-with-glasses-vector-illustration-.jpg',
         role: 'store',
+        status: 'active',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -133,6 +155,19 @@ module.exports = {
         phone: '0998887782',
         profile_image_url: 'https://cdn4.vectorstock.com/i/1000x1000/77/43/young-man-head-avatar-cartoon-face-character-vector-21757743.jpg',
         role: 'store',
+        status: 'active',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        password: '$2a$11$DkmGpgc.cskXkOv39cMx6.Kn0yDhNldqjN70qeUWCitXlsX6Y2d8q', //hansapass
+        firstname: 'บังคม',
+        lastname: 'ใสสะอาด',
+        email: 'bung@gmail.com',
+        phone: '0998887782',
+        profile_image_url: 'https://cdn4.vectorstock.com/i/1000x1000/77/43/young-man-head-avatar-cartoon-face-character-vector-21757743.jpg',
+        role: 'store',
+        status: 'banned',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -144,6 +179,7 @@ module.exports = {
         phone: '081xxx1981',
         profile_image_url: 'https://f.ptcdn.info/496/043/000/o8oqydgre871QE9ii7m-o.jpg',
         role: 'admin',
+        status: 'active',
         createdAt: new Date(),
         updatedAt: new Date()
       }
