@@ -80,6 +80,7 @@ Create a config.json `./config/config.json` with this detail, edit your password
       "host": "127.0.0.1",
       "dialect": "mysql",
       "operatorsAliases": 0,
+      "protocol": "http",
       "port": 3306,
       "app_port": 5000,
       "timezone": "Asia/Bangkok"
@@ -91,6 +92,7 @@ Create a config.json `./config/config.json` with this detail, edit your password
       "host": "127.0.0.1",
       "dialect": "mysql",
       "operatorsAliases": 0,
+      "protocol": "http",
       "port": 3306,
       "app_port": 5000,
       "timezone": "Asia/Bangkok"
@@ -102,6 +104,7 @@ Create a config.json `./config/config.json` with this detail, edit your password
       "host": "127.0.0.1",
       "dialect": "mysql",
       "operatorsAliases": 0,
+      "protocol": "http",
       "port": 3306,
       "app_port": 5000,
       "timezone": "Asia/Bangkok"

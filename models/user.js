@@ -20,14 +20,17 @@ module.exports = (sequelize, DataTypes) => {
     },
     role: {
       type: DataTypes.ENUM("admin", "store", "user")
+    },
+    status: {
+      type: DataTypes.ENUM("active", "banned")
     }
   })
 
   user.associate = (models) => {
-    user.hasOne(models.store, {foreignKey: 'user_id'})
-    user.hasMany(models.guide_text, {foreignKey: 'user_id'})
-    user.hasMany(models.feedback, {foreignKey: 'user_id'})
-    user.hasMany(models.order, {foreignKey: 'user_id'})
+    user.hasOne(models.store, { foreignKey: 'user_id' })
+    user.hasMany(models.guide_text, { foreignKey: 'user_id' })
+    user.hasMany(models.feedback, { foreignKey: 'user_id' })
+    user.hasMany(models.order, { foreignKey: 'user_id' })
   }
   return user
 }
