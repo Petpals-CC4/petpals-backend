@@ -20,7 +20,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     role: {
       type: DataTypes.ENUM("admin", "store", "user")
-    }
+    },
+    status: {
+      type: DataTypes.ENUM("active", "banned")
+    },
   })
 
   user.associate = (models) => {
