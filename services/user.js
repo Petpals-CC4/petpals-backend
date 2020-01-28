@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const config = require('../config/passport');
 const bcrypt = require('bcryptjs')
+const { findStoreIDbyUserID } = require("../utils");
 
 module.exports = (app, db) => {
   app.post('/signup', (req, res, next) => {
@@ -67,7 +68,7 @@ module.exports = (app, db) => {
   });
 
   app.post('/signin', (req, res, next) => {
-    passport.authenticate('login', (err, user, info) => {
+    passport.authenticate('login', async (err, user, info) => {
       if (err) {
         console.error(err);
         res.status(400).send({ message: "Bad Request" })
@@ -77,7 +78,8 @@ module.exports = (app, db) => {
         res.status(403).send({ message: info.message });
       } else {
         // console.log('User Authenticated');
-        const token = jwt.sign({ id: user.id, role: user.role, username: user.email }, config.jwtOptions.secretOrKey, {
+        const store_id = await findStoreIDbyUserID(db, user.id);
+        const token = jwt.sign({ id: user.id, role: user.role, username: user.email, store_id }, config.jwtOptions.secretOrKey, {
           expiresIn: 3600,
         });
         // console.log(token)
