@@ -46,7 +46,8 @@ module.exports = (app, db, Op) => {
         end_date: req.body.end_date,
         payment_name: req.body.payment_name,
         booking_price: req.body.booking_price,
-        total_price: req.body.total_price
+        total_price: req.body.total_price,
+        bank_id: req.body.bank_id
       };
 
       //flow to create order-service
@@ -67,6 +68,7 @@ module.exports = (app, db, Op) => {
       const createOrder = await db.order.create({
         user_id: orderRequest.user_id,
         store_id: orderRequest.store_id,
+        bank_id: orderRequest.bank_id,
         payment_method_id: Number(paymentMethodId),
         status_id: orderStatusId,
         start_date: orderRequest.start_date,
@@ -187,6 +189,7 @@ module.exports = (app, db, Op) => {
         try {
           const createdOrder = await db.order.create({
             user_id,
+            bank_id: orderRequest.bank_id,
             store_id: orderRequest.store_id,
             payment_method_id: orderRequest.payment_method_id,
             status_id: 1, // waiting_payment

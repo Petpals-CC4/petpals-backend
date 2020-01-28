@@ -14,8 +14,8 @@ module.exports = {
         },
         {
             store_id: '1',
-            service_name: 'รับดูแลปหมา',
-            service_description: 'รับบริการ ดูแลน้องที่ต้องการการดูแลและใส่ใจเป็นพิเศษ และจะจำห้องให้น้องแยกเป็นการส่วนตัว',
+            service_name: 'รับดูแลหมา',
+            service_description: 'รับบริการ ดูแลน้องที่ต้องการการดูแลและใส่ใจเป็นพิเศษ และจะจัดห้องให้น้องแยกเป็นการส่วนตัว',
             service_price: '4000',
             createdAt: new Date(),
             updatedAt: new Date()

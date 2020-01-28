@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     status: {
       type: DataTypes.ENUM("active", "banned")
-    }
+    },
   })
 
   user.associate = (models) => {
