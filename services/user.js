@@ -184,6 +184,35 @@ module.exports = (app, db) => {
       getUser(db, req, res, "store");
     }
   );
+
+  app.put("/admin/update_status",
+    passport.authenticate("jwt", {
+      session: false
+    }),
+    async (req, res) => {
+      try {
+        if (req.user.role === "admin") {
+          const foundUser = await db.user.findOne({
+            where: {
+              id: req.body.user_id
+            }
+          })
+          if (!foundUser) {
+            res.status(404).send({ message: "Error: User Not Found" });
+          } else {
+            let userStatus = await foundUser.status
+            const updatedUserStatus = await foundUser.update({
+              status: userStatus === "active" ? "banned" : "active"
+            })
+            res.status(200).send({ message: "User Status Updated" });
+          }
+        }
+      } catch (error) {
+        res.status(500).send(error)
+      }
+    }
+  )
+
 };
 
 updateUserRole = async (user, user_data = {}) => {
