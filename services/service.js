@@ -97,7 +97,7 @@ module.exports = (app, db, Op) => {
 
   app.get(
     "/service",
-    // passport.authenticate("jwt", { session: false }),
+    passport.authenticate("jwt", { session: false }),
     async (req, res) => {
       const store_id = await findStoreIDbyUserID(db, req.user.id);
       if (store_id !== null) {
