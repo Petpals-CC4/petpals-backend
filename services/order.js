@@ -66,8 +66,7 @@ module.exports = (app, db, Op) => {
             {
               model: db.store,
               attributes: [
-                "store_name",
-                "store_description"
+                "store_name"
               ]
             }
           ],
