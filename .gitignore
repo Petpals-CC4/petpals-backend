@@ -2,3 +2,5 @@
 node_modules
 yarn-error.log
 */config.json
+config/config.json
+uploads/

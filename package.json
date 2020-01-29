@@ -6,13 +6,14 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "seed": "npx sequelize-cli db:seed:all"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "multer": "^1.4.2",
     "mysql2": "^2.1.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",

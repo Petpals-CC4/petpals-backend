@@ -8,7 +8,7 @@ const db = require('../models')
 
 const BCRYPT_SALT_ROUNDS = 11;
 let jwtOptions = {};
-jwtOptions.secretOrKey = 'chinnawat.chimdee'
+jwtOptions.secretOrKey = 'petpals.c0d3c4mp2020'
 
 passport.use(
   'register',
@@ -20,12 +20,12 @@ passport.use(
     },
     async (username, password, done) => {
       let userFound = await db.user.findOne({
-        where: { username: username }
+        where: { email: username }
       })
       if (!userFound) {
         let salt = bcrypt.genSaltSync(BCRYPT_SALT_ROUNDS);
         let hashedPassword = bcrypt.hashSync(password, salt);
-        let createdUser = await db.user.create({ username, password: hashedPassword, role: "free" })
+        let createdUser = await db.user.create({ email: username, password: hashedPassword, role: "user" })
         if (createdUser) {
           console.log("user created");
           return done(null, createdUser);
@@ -50,7 +50,7 @@ passport.use(
       session: false,
     },
     async (username, password, done) => {
-      let userFound = await db.user.findOne({ where: { username } })
+      let userFound = await db.user.findOne({ where: { email: username } })
       if (!userFound) {
         console.log("Not Found Username")
         return done(null, false, { message: 'Username not found or wrong password' });
@@ -83,7 +83,7 @@ passport.use(
     },
     async (username, password, done) => {
       let userFound = await db.user.findOne({
-        where: { username: username }
+        where: { email: username }
       })
       if (!userFound) {
         console.error("Not Found User")
