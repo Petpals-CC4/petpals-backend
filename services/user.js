@@ -183,7 +183,11 @@ module.exports = (app, db) => {
     "/admin_user",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
-      getUser(db, req, res, "user");
+      if (req.user.role === "admin") {
+        getUser(db, req, res, "user");
+      } else {
+        res.status(401).send({ message: "Unauthorized" });
+      }
     }
   );
 
@@ -191,7 +195,11 @@ module.exports = (app, db) => {
     "/admin_store",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
-      getUser(db, req, res, "store");
+      if (req.user.role === "admin") {
+        getUser(db, req, res, "store");
+      } else {
+        res.status(401).send({ message: "Unauthorized" });
+      }
     }
   );
 
@@ -216,6 +224,8 @@ module.exports = (app, db) => {
             })
             res.status(200).send({ message: "User Status Updated" });
           }
+        } else {
+          res.status(401).send({ message: "Unauthorized" });
         }
       } catch (error) {
         res.status(500).send(error)
