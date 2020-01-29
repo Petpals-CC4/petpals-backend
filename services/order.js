@@ -308,6 +308,90 @@ module.exports = (app, db, Op) => {
   //   res.status(200).send({ message: "Uploaded", file: req.file })
   // })
 
+  app.put(
+    "/order_status/reject",
+    passport.authenticate("jwt", {
+      session: false
+    }),
+    async (req, res) => {
+      const order_id = req.body.order_id
+      if (order_id) {
+        const user_id = req.user.id
+        if (req.user.role === "user") {
+          const order = await db.order.findOne({
+            where: {
+              id: order_id,
+              user_id,
+              status_id: 1
+            }
+          })
+          if (!order) {
+            res.status(404).send({ message: "Error: Not Found Order" });
+          } else {
+            await order.update({
+              status_id: 4 // Cancelled
+            })
+            res.status(200).send({ message: "Updated Order Status" })
+          }
+        } else {
+          const store_id = await findStoreIDbyUserID(db, req.user.id);
+          const order = await db.order.findOne({
+            where: {
+              id: order_id,
+              store_id,
+              status_id: 2
+            }
+          })
+          if (!order) {
+            res.status(404).send({ message: "Error: Not Found Order" });
+          } else {
+            await order.update({
+              status_id: 4 // Cancelled
+            })
+            res.status(200).send({ message: "Updated Order Status" })
+          }
+        }
+      } else {
+        res.status(400).send({ message: "Missing Parameter" })
+      }
+    }
+  )
+
+  app.put(
+    "/order_status/approve",
+    passport.authenticate("jwt", {
+      session: false
+    }),
+    async (req, res) => {
+      const order_id = req.body.order_id
+      if (order_id) {
+        const user_id = req.user.id
+        if (req.user.role === "store") {
+          const store_id = await findStoreIDbyUserID(db, user_id);
+          const order = await db.order.findOne({
+            where: {
+              id: order_id,
+              store_id,
+              status_id: 2
+            }
+          })
+          if (!order) {
+            res.status(404).send({ message: "Error: Not Found Order" });
+          } else {
+            await order.update({
+              status_id: 3 // Completed
+            })
+            res.status(200).send({ message: "Updated Order Status" })
+          }
+        } else {
+
+        }
+      } else {
+        res.status(400).send({ message: "Missing Parameter" })
+      }
+    }
+  )
+
   app.post("/upload_slip_image",
     passport.authenticate("jwt", {
       session: false
