@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   feedback.associate = (models) => {
     feedback.belongsTo(models.user, {foreignKey: 'user_id'})
     feedback.belongsTo(models.store, {foreignKey: 'store_id'})
+    feedback.hasOne(models.order, {foreignKey: 'feedback_id'})
   }
   return feedback
 }

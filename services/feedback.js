@@ -125,7 +125,16 @@ module.exports = (app, db) => {
             message: "Cannot Feedback, please check your body request"
           });
         } else {
-          res.status(201).json(result);
+          const feedback_id = await result.id
+          console.log(feedback_id)
+          const updatedOrder = await db.order.update({
+            feedback_id
+          }, {
+            where: {
+              id: req.body.order_id,
+            }
+          })
+          res.status(201).json(updatedOrder);
         }
       } else {
         res.status(401).send({

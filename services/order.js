@@ -68,6 +68,13 @@ module.exports = (app, db, Op) => {
               attributes: [
                 "store_name"
               ]
+            },
+            {
+              model: db.feedback,
+              attributes: [
+                "rating",
+                "comment"
+              ]
             }
           ],
           where: {
@@ -112,6 +119,13 @@ module.exports = (app, db, Op) => {
                   "phone"
                 ]
               },
+              {
+                model: db.feedback,
+                attributes: [
+                  "rating",
+                  "comment"
+                ]
+              }
             ],
             where: { store_id }
           });
@@ -161,6 +175,13 @@ module.exports = (app, db, Op) => {
                 "store_description"
               ]
             },
+            {
+              model: db.feedback,
+              attributes: [
+                "rating",
+                "comment"
+              ]
+            }
           ],
           where: {
             user_id: req.user.id,

@@ -30,6 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     order.belongsToMany(models.service, {foreignKey: 'order_id', through: 'order_service'})
     order.belongsTo(models.payment_method, {foreignKey: 'payment_method_id'})
     order.belongsTo(models.bank, {foreignKey: 'bank_id'})
+    order.belongsTo(models.feedback, {foreignKey: 'feedback_id'})
   }
   return order
 }

@@ -80,6 +80,7 @@ module.exports = {
         user_id: '9',
         store_id: '3',
         status_id: '3',
+        feedback_id: '10',
         payment_method_id: '5',
         createdAt: new Date(),
         updatedAt: new Date()
