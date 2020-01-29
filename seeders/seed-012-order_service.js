@@ -52,6 +52,55 @@ module.exports = {
         order_id: '3',
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        service_id: '7',
+        service_price: '1500',
+        order_id: '4',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        service_id: '8',
+        service_price: '200',
+        order_id: '4',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        service_id: '9',
+        service_price: '1500',
+        order_id: '5',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        service_id: '10',
+        service_price: '100',
+        order_id: '5',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        service_id: '7',
+        service_price: '1500',
+        order_id: '6',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        service_id: '8',
+        service_price: '200',
+        order_id: '6',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        service_id: '9',
+        service_price: '1500',
+        order_id: '6',
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ])
   }
