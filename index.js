@@ -27,8 +27,8 @@ const Op = Sequelize.Op
 app.use(cors())
 app.use(express.static('uploads'));
 app.use(passport.initialize());
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 require('./config/passport')
 
