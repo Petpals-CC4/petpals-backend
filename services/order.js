@@ -84,7 +84,11 @@ module.exports = (app, db, Op) => {
         if (!result) {
           res.status(404).send({ message: "Not found order" });
         } else {
-          res.status(200).send(result);
+          let orderList = await result.map(order => ({
+            ...order.dataValues,
+            slip_image: order.dataValues.slip_image ? `${PROTOCOL}://${HOST}:${PORT}/${order.dataValues.slip_image}` : order.dataValues.slip_image
+          }))
+          res.status(200).send(orderList);
         }
       } else {
         const store_id = await findStoreIDbyUserID(db, req.user.id);
@@ -104,6 +108,15 @@ module.exports = (app, db, Op) => {
                   "account_name",
                   "account_number"
                 ]
+              },
+              {
+                model: db.service,
+                attributes: [
+                  "service_name"
+                ],
+                through: {
+                  attributes: ['service_price']
+                }
               },
               {
                 model: db.order_status,
@@ -132,7 +145,15 @@ module.exports = (app, db, Op) => {
           if (!result) {
             res.status(404).send({ message: "Order method Not Found" });
           } else {
-            res.status(200).send(result);
+            let orderList = await result.map(order => ({
+              ...order.dataValues,
+              services: order.dataValues.services ? order.dataValues.services.map(service => ({
+                service_name: service.service_name,
+                service_price: service.order_service.service_price
+              })) : [],
+              slip_image: order.dataValues.slip_image ? `${PROTOCOL}://${HOST}:${PORT}/${order.dataValues.slip_image}` : order.dataValues.slip_image
+            }))
+            res.status(200).send(orderList);
           }
         } else {
           res.status(401).send({ message: "Unauthorized" });
@@ -191,8 +212,11 @@ module.exports = (app, db, Op) => {
         if (!result) {
           res.status(404).send({ message: "Not found order" });
         } else {
-          // console.log(result);
-          res.status(200).send(result);
+          let orderList = await result.map(order => ({
+            ...order.dataValues,
+            slip_image: order.dataValues.slip_image ? `${PROTOCOL}://${HOST}:${PORT}/${order.dataValues.slip_image}` : order.dataValues.slip_image
+          }))
+          res.status(200).send(orderList);
         }
       } else {
         const store_id = await findStoreIDbyUserID(db, req.user.id);
@@ -235,7 +259,11 @@ module.exports = (app, db, Op) => {
           if (!result) {
             res.status(404).send({ message: "Order method Not Found" });
           } else {
-            res.status(200).send(result);
+            let orderList = await result.map(order => ({
+              ...order.dataValues,
+              slip_image: order.dataValues.slip_image ? `${PROTOCOL}://${HOST}:${PORT}/${order.dataValues.slip_image}` : order.dataValues.slip_image
+            }))
+            res.status(200).send(orderList);
           }
         } else {
           res.status(401).send({ message: "Unauthorized" });
