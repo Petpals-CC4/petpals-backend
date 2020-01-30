@@ -4,6 +4,42 @@ const config = require("../config/passport");
 const bcrypt = require("bcryptjs");
 const { findStoreIDbyUserID } = require("../utils");
 
+
+const multer = require('multer')
+const fs = require('fs');
+const dir = './uploads/profile';
+
+const env = process.env.NODE_ENV || 'development'
+const configJSON = require('../config/config.json')[env];
+const PROTOCOL = configJSON.protocol
+const HOST = configJSON.host
+const PORT = configJSON.app_port
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir);
+    }
+    cb(null, dir)
+  },
+  filename: (req, file, cb) => {
+    let imageExtension = file.originalname.split('.').pop();
+    let imageName = new Date().getTime() + `.${imageExtension}`;
+    cb(null, imageName)
+  }
+})
+const upload = multer({
+  storage,
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+      cb(null, true);
+    } else {
+      cb(null, false);
+      return cb(new Error('Allowed only .png, .jpg and .jpeg'));
+    }
+  }
+})
+
 const getUser = async (db, req, res, mode = "user") => {
   const User = await db.user.findAll({
     attributes: ["id", "email", "firstname", "lastname", "role", "status"],
@@ -34,7 +70,9 @@ const getUser = async (db, req, res, mode = "user") => {
 };
 
 module.exports = (app, db) => {
-  app.post("/signup", (req, res, next) => {
+  app.post("/signup",
+  upload.single("profile_image_url"),
+  (req, res, next) => {
     passport.authenticate("register", async (err, user, info) => {
       if (err) {
         console.error(err);
@@ -48,24 +86,33 @@ module.exports = (app, db) => {
           console.error("Not Found User");
           res.status(404).send({ message: "Error: Not Found User" });
         } else {
-          let result = await updateUserRole(user, {
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            phone: req.body.phone,
-            profile_image_url: req.body.profile_image_url,
-            role: "user"
-          });
-          if (result.message !== "user created") {
-            res.status(500).send({ message: "Error: Cannot Set Role User" });
+          if (!req.file) {
+            res.status(400).send({
+              message: "No file uploaded"
+            });
           } else {
-            res.status(200).send(result);
+            let profileImg = req.file
+            let result = await updateUserRole(user, {
+              firstname: req.body.firstname,
+              lastname: req.body.lastname,
+              phone: req.body.phone,
+              profile_image_url: 'profile/' + profileImg.filename,
+              role: "user"
+            });
+            if (result.message !== "user created") {
+              res.status(500).send({ message: "Error: Cannot Set Role User" });
+            } else {
+              res.status(200).send(result);
+            }
           }
         }
       }
     })(req, res, next);
   });
 
-  app.post("/signup_store", (req, res, next) => {
+  app.post("/signup_store", 
+  upload.single("profile_image_url"),
+  (req, res, next) => {
     passport.authenticate("register", async (err, user, info) => {
       if (err) {
         console.error(err);
@@ -79,19 +126,30 @@ module.exports = (app, db) => {
           console.error("Not Found User");
           res.status(404).send({ message: "Error: Not Found User" });
         } else {
-          let result = await updateUserRole(user, {
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            phone: req.body.phone,
-            profile_image_url: req.body.profile_image_url,
-            role: "store"
-          });
-          if (result.message !== "user created") {
-            res
-              .status(500)
-              .send({ message: "Error: Cannot Set Role User", ...result });
+          if (!req.file) {
+            res.status(400).send({
+              message: "No file uploaded"
+            });
           } else {
-            res.status(200).send(result);
+            let profileImg = req.file
+            let result = await updateUserRole(user, {
+              firstname: req.body.firstname,
+              lastname: req.body.lastname,
+              phone: req.body.phone,
+              profile_image_url: 'profile/' + profileImg.filename,
+              role: "store"
+            });
+            if (result.message !== "user created") {
+              res.status(500).send({ message: "Error: Cannot Set Role Store" });
+            } else {
+              const user_id = user.dataValues.id
+              const userCreated = await db.store.create({
+                store_name: "กรุณาใส่ชื่อร้าน",
+                store_description: "กรุณาใส่รายละเอียดร้าน",
+                user_id
+              })
+              res.status(200).send(result);
+            }
           }
         }
       }

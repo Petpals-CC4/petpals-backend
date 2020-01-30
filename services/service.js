@@ -1,6 +1,12 @@
 const passport = require("passport");
 const { findStoreIDbyUserID } = require("../utils");
 
+const env = process.env.NODE_ENV || 'development'
+const configJSON = require('../config/config.json')[env];
+const PROTOCOL = configJSON.protocol
+const HOST = configJSON.host
+const PORT = configJSON.app_port
+
 module.exports = (app, db, Op) => {
   app.get("/landingpage", async (req, res) => {
     const topListStore = await db.store.findAll({
@@ -31,12 +37,14 @@ module.exports = (app, db, Op) => {
     if (topListStore) {
       const newTopListStore = await topListStore.map(list => {
         let feedbackSummary = list.feedbacks.reduce((sum, curr) => sum += curr.rating, 0)
+        const profile_image_url = list.user.profile_image_url
         return {
           id: list.id,
           store_name: list.store_name,
           store_description: list.store_description,
           services: list.services,
-          profile_image_url: list.user.profile_image_url,
+          // profile_image_url: list.user.profile_image_url !== null && list.user.profile_image_url.includes("http") ? list.user.profile_image_url : `${PROTOCOL}://${HOST}:${PORT}/${list.user.profile_image_url}`,
+          profile_image_url: profile_image_url ? (profile_image_url.includes("http") ? profile_image_url : `${PROTOCOL}://${HOST}:${PORT}/${list.user.profile_image_url}`) : null,
           feedback_score: feedbackSummary / list.feedbacks.length
         }
       })
@@ -88,7 +96,7 @@ module.exports = (app, db, Op) => {
         store_name: list.store_name,
         store_description: list.store_description,
         services: list.services,
-        profile_image_url: list.user.profile_image_url,
+        profile_image_url: list.user.profile_image_url.includes("http") ? list.user.profile_image_url : `${PROTOCOL}://${HOST}:${PORT}/${list.user.profile_image_url}`,
         feedback_score: list.feedbacks.length > 0 ? (feedbackSummary / list.feedbacks.length).toFixed(2) : 0,
       }
     })
