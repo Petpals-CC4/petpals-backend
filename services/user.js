@@ -147,10 +147,19 @@ module.exports = (app, db) => {
               res.status(500).send({ message: "Error: Cannot Set Role Store" });
             } else {
               const user_id = user.dataValues.id
-              const userCreated = await db.store.create({
+              const storeCreated = await db.store.create({
                 store_name: "กรุณาใส่ชื่อร้าน",
                 store_description: "กรุณาใส่รายละเอียดร้าน",
                 user_id
+              })
+              const store_id = storeCreated.dataValues.id
+              const paymentMethod1Created = await db.payment_method.create({
+                payment_name: "โอนเงินผ่านธนาคาร",
+                store_id
+              })
+              const paymentMethod2Created = await db.payment_method.create({
+                payment_name: "ชำระเงินสด",
+                store_id
               })
               res.status(200).send(result);
             }
