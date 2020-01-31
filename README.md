@@ -29,7 +29,17 @@ graph LR;
 
 ## 📋 Features
 
-- APIs CRUD for ...
+- APIs CRUD for
+  - bankService
+  - feedbackService
+  - guideTextService
+  - orderService
+  - serviceService
+  - storeService
+  - userService
+  - storeImageService
+  - addressService
+  - paymentMethodService
 
 ## 🏷 Versioning
 
