@@ -17,6 +17,10 @@ const PORT = configJSON.app_port
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
+    let firstPath = dir.split("/")[1]
+    if (!fs.existsSync(firstPath)) {
+      fs.mkdirSync(firstPath);
+    }
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir);
     }
