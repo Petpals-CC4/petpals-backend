@@ -1,6 +1,12 @@
 const passport = require("passport");
 const { findStoreIDbyUserID } = require("../utils");
 
+const env = process.env.NODE_ENV || 'development'
+const config = require('../config/config.json')[env];
+const PROTOCOL = config.protocol
+const HOST = config.host
+const PORT = config.app_port
+
 const getStoreBio = async (db, req, res) => {
   const store_id = await findStoreIDbyUserID(db, req.user.id);
   const Store = await db.store.findOne({
@@ -26,7 +32,7 @@ const getStoreBio = async (db, req, res) => {
       store_name: store.store_name,
       store_description: store.store_description,
       store_images: store.store_images.map(item => item.image_url),
-      profile_image_url: store.user.profile_image_url
+      profile_image_url: store.user.profile_image_url.includes("http") ? store.user.profile_image_url : `${PROTOCOL}://${HOST}:${PORT}/${store.user.profile_image_url}`
     }
     res.status(200).json(returnDataStore)
   }
@@ -113,7 +119,7 @@ module.exports = (app, db) => {
           fullname: item.user.firstname + " " + item.user.lastname
         })),
         service: store.services,
-        profile_image_url: store.user.profile_image_url
+        profile_image_url: store.user.profile_image_url.includes("http") ? store.user.profile_image_url : `${PROTOCOL}://${HOST}:${PORT}/${store.user.profile_image_url}`
       }
       res.status(200).json(returnDataStore)
     }
