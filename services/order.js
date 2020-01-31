@@ -58,9 +58,26 @@ module.exports = (app, db, Op) => {
               ]
             },
             {
+              model: db.service,
+              attributes: [
+                "service_name"
+              ],
+              through: {
+                attributes: ['service_price']
+              }
+            },
+            {
               model: db.order_status,
               attributes: [
                 "status_name"
+              ]
+            },
+            {
+              model: db.user,
+              attributes: [
+                "firstname",
+                "lastname",
+                "phone"
               ]
             },
             {
@@ -86,6 +103,10 @@ module.exports = (app, db, Op) => {
         } else {
           let orderList = await result.map(order => ({
             ...order.dataValues,
+            services: order.dataValues.services ? order.dataValues.services.map(service => ({
+              service_name: service.service_name,
+              service_price: service.order_service.service_price
+            })) : [],
             slip_image: order.dataValues.slip_image ? `${PROTOCOL}://${HOST}:${PORT}/${order.dataValues.slip_image}` : order.dataValues.slip_image
           }))
           res.status(200).send(orderList);
@@ -184,6 +205,15 @@ module.exports = (app, db, Op) => {
               ]
             },
             {
+              model: db.service,
+              attributes: [
+                "service_name"
+              ],
+              through: {
+                attributes: ['service_price']
+              }
+            },
+            {
               model: db.order_status,
               attributes: [
                 "status_name"
@@ -212,10 +242,15 @@ module.exports = (app, db, Op) => {
         if (!result) {
           res.status(404).send({ message: "Not found order" });
         } else {
-          let orderList = await result.map(order => ({
+          const order = await result
+          let orderList = {
             ...order.dataValues,
+            services: order.dataValues.services ? order.dataValues.services.map(service => ({
+              service_name: service.service_name,
+              service_price: service.order_service.service_price
+            })) : [],
             slip_image: order.dataValues.slip_image ? `${PROTOCOL}://${HOST}:${PORT}/${order.dataValues.slip_image}` : order.dataValues.slip_image
-          }))
+          }
           res.status(200).send(orderList);
         }
       } else {
@@ -236,6 +271,15 @@ module.exports = (app, db, Op) => {
                   "account_name",
                   "account_number"
                 ]
+              },
+              {
+                model: db.service,
+                attributes: [
+                  "service_name"
+                ],
+                through: {
+                  attributes: ['service_price']
+                }
               },
               {
                 model: db.order_status,
@@ -259,10 +303,15 @@ module.exports = (app, db, Op) => {
           if (!result) {
             res.status(404).send({ message: "Order method Not Found" });
           } else {
-            let orderList = await result.map(order => ({
+            const order = await result
+            let orderList = {
               ...order.dataValues,
+              services: order.dataValues.services ? order.dataValues.services.map(service => ({
+                service_name: service.service_name,
+                service_price: service.order_service.service_price
+              })) : [],
               slip_image: order.dataValues.slip_image ? `${PROTOCOL}://${HOST}:${PORT}/${order.dataValues.slip_image}` : order.dataValues.slip_image
-            }))
+            }
             res.status(200).send(orderList);
           }
         } else {

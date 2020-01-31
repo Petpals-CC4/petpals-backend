@@ -120,7 +120,7 @@ module.exports = (app, db, Op) => {
           res.status(200).send(result);
         }
       } else {
-        res.status(401).send({ message: "Unauthorized"})
+        res.status(401).send({ message: "Unauthorized" })
       }
     }
   );
@@ -143,7 +143,7 @@ module.exports = (app, db, Op) => {
           res.status(201).json(result);
         }
       } else {
-        res.status(401).send({ message: "Unauthorized"})
+        res.status(401).send({ message: "Unauthorized" })
       }
     }
   );
@@ -175,14 +175,14 @@ module.exports = (app, db, Op) => {
           }
         }
       } else {
-        res.status(401).send({ message: "Unauthorized"})
+        res.status(401).send({ message: "Unauthorized" })
       }
     }
   );
 
   app.delete(
     "/service/:id",
-    // passport.authenticate("jwt", { session: false }),
+    passport.authenticate("jwt", { session: false }),
     async (req, res) => {
       const id = req.params.id;
       const store_id = await findStoreIDbyUserID(db, req.user.id);
@@ -198,7 +198,7 @@ module.exports = (app, db, Op) => {
           res.status(200).send({ message: "Delete Success" });
         }
       } else {
-        res.status(401).send({ message: "Unauthorized"})
+        res.status(401).send({ message: "Unauthorized" })
       }
     }
   );
